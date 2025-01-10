@@ -6,17 +6,39 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { useToast } from "@/components/ui/use-toast";
 
 const Profile = () => {
+  const { toast } = useToast();
+
+  const handleShare = () => {
+    const shareableLink = window.location.href;
+    navigator.clipboard.writeText(shareableLink);
+    toast({
+      title: "Link copied!",
+      description: "The profile link has been copied to your clipboard.",
+      duration: 3000,
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
       <main className="p-6 md:ml-64">
-        <PageHeader
-          title="My Profile"
-          description="Manage your personal information and preferences"
-          icon={UserCircle}
-        />
+        <div className="flex justify-between items-center mb-6">
+          <PageHeader
+            title="My Profile"
+            description="Manage your personal information and preferences"
+            icon={UserCircle}
+          />
+          <Button 
+            onClick={handleShare}
+            className="flex items-center gap-2"
+          >
+            <Share2 className="w-4 h-4" />
+            Share Profile
+          </Button>
+        </div>
 
         <div className="max-w-4xl mx-auto">
           <ProfileSection
