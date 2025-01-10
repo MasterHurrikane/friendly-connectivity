@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Users, Home, UserPlus, Calendar } from "lucide-react";
+import { Users, Home, UserPlus, Calendar, UserRound } from "lucide-react";
 
 const Navigation = () => {
   const location = useLocation();
@@ -9,6 +9,7 @@ const Navigation = () => {
 
   const navItems = [
     { path: "/", icon: Home, label: "Dashboard" },
+    { path: "/profile", icon: UserRound, label: "My Profile" },
     { path: "/contacts", icon: Users, label: "Contacts" },
     { path: "/add", icon: UserPlus, label: "Add Contact" },
     { path: "/calendar", icon: Calendar, label: "Calendar" },

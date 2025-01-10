@@ -4,6 +4,7 @@ import Login from "./pages/auth/Login"
 import Signup from "./pages/auth/Signup"
 import ForgotPassword from "./pages/auth/ForgotPassword"
 import Dashboard from "./pages/Dashboard"
+import Profile from "./pages/Profile"
 import Navigation from "./components/Navigation"
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/forgot-password" element={<ForgotPassword />} />
         <Route path="/" element={<Dashboard />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   )
