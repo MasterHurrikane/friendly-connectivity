@@ -3,6 +3,8 @@ import Welcome from "./pages/auth/Welcome"
 import Login from "./pages/auth/Login"
 import Signup from "./pages/auth/Signup"
 import ForgotPassword from "./pages/auth/ForgotPassword"
+import Dashboard from "./pages/Dashboard"
+import Navigation from "./components/Navigation"
 
 function App() {
   return (
@@ -12,7 +14,7 @@ function App() {
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/forgot-password" element={<ForgotPassword />} />
-        <Route path="/" element={<Welcome />} />
+        <Route path="/" element={<Dashboard />} />
       </Routes>
     </Router>
   )
