@@ -1,9 +1,65 @@
 import { motion } from "framer-motion"
 import { Bell, Calendar, MessageSquare, Users } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 import Navigation from "@/components/Navigation"
 import { Card } from "@/components/ui/card"
 
 const Dashboard = () => {
+  const navigate = useNavigate()
+
+  const cards = [
+    {
+      title: "Friend Activity",
+      subtitle: "3 new updates",
+      icon: Users,
+      iconBg: "bg-primary/10",
+      iconColor: "text-primary",
+      content: [
+        "Sarah shared a new photo",
+        "John's birthday is tomorrow",
+        "New event invitation from Mike",
+      ],
+      route: "/friends",
+    },
+    {
+      title: "Upcoming Events",
+      subtitle: "Next 7 days",
+      icon: Calendar,
+      iconBg: "bg-secondary/10",
+      iconColor: "text-secondary",
+      content: [
+        { text: "Coffee Meetup", date: "Tomorrow" },
+        { text: "Book Club", date: "In 3 days" },
+      ],
+      route: "/calendar",
+    },
+    {
+      title: "Notifications",
+      subtitle: "5 unread",
+      icon: Bell,
+      iconBg: "bg-pink-100",
+      iconColor: "text-pink-500",
+      content: [
+        "2 new friend requests",
+        "3 event reminders",
+        "Birthday reminder: Emma (in 5 days)",
+      ],
+      route: "/notifications",
+    },
+    {
+      title: "Recent Messages",
+      subtitle: "2 unread",
+      icon: MessageSquare,
+      iconBg: "bg-blue-100",
+      iconColor: "text-blue-500",
+      content: [
+        { text: "Alex: Hey, are you free this weekend?", time: "2h ago" },
+        { text: "Emma: Thanks for the birthday wish!", time: "5h ago" },
+      ],
+      route: "/messages",
+    },
+  ]
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
       <Navigation />
@@ -13,87 +69,43 @@ const Dashboard = () => {
           animate={{ opacity: 1, y: 0 }}
           className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
-          {/* Activity Summary Card */}
-          <Card className="p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-primary/10 rounded-full">
-                <Users className="w-6 h-6 text-primary" />
+          {cards.map((card) => (
+            <Card
+              key={card.title}
+              className="p-6 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer transform hover:scale-105"
+              onClick={() => navigate(card.route)}
+            >
+              <div className="flex items-center gap-4 mb-4">
+                <div className={`p-3 rounded-full ${card.iconBg}`}>
+                  <card.icon className={`w-6 h-6 ${card.iconColor}`} />
+                </div>
+                <div>
+                  <h3 className="font-semibold">{card.title}</h3>
+                  <p className="text-sm text-gray-500">{card.subtitle}</p>
+                </div>
               </div>
-              <div>
-                <h3 className="font-semibold">Friend Activity</h3>
-                <p className="text-sm text-gray-500">3 new updates</p>
+              <div className="space-y-3">
+                {Array.isArray(card.content) &&
+                  card.content.map((item, index) => {
+                    if (typeof item === "string") {
+                      return <p key={index} className="text-sm">{item}</p>
+                    } else {
+                      return (
+                        <div
+                          key={index}
+                          className="flex justify-between items-center"
+                        >
+                          <p className="text-sm">{item.text}</p>
+                          <span className="text-xs text-gray-500">
+                            {item.date || item.time}
+                          </span>
+                        </div>
+                      )
+                    }
+                  })}
               </div>
-            </div>
-            <div className="space-y-3">
-              <p className="text-sm">Sarah shared a new photo</p>
-              <p className="text-sm">John's birthday is tomorrow</p>
-              <p className="text-sm">New event invitation from Mike</p>
-            </div>
-          </Card>
-
-          {/* Upcoming Events Card */}
-          <Card className="p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-secondary/10 rounded-full">
-                <Calendar className="w-6 h-6 text-secondary" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Upcoming Events</h3>
-                <p className="text-sm text-gray-500">Next 7 days</p>
-              </div>
-            </div>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <p className="text-sm">Coffee Meetup</p>
-                <span className="text-xs text-gray-500">Tomorrow</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <p className="text-sm">Book Club</p>
-                <span className="text-xs text-gray-500">In 3 days</span>
-              </div>
-            </div>
-          </Card>
-
-          {/* Notifications Card */}
-          <Card className="p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-pink-100 rounded-full">
-                <Bell className="w-6 h-6 text-pink-500" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Notifications</h3>
-                <p className="text-sm text-gray-500">5 unread</p>
-              </div>
-            </div>
-            <div className="space-y-3">
-              <p className="text-sm">2 new friend requests</p>
-              <p className="text-sm">3 event reminders</p>
-              <p className="text-sm">Birthday reminder: Emma (in 5 days)</p>
-            </div>
-          </Card>
-
-          {/* Messages Card */}
-          <Card className="p-6 shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-blue-100 rounded-full">
-                <MessageSquare className="w-6 h-6 text-blue-500" />
-              </div>
-              <div>
-                <h3 className="font-semibold">Recent Messages</h3>
-                <p className="text-sm text-gray-500">2 unread</p>
-              </div>
-            </div>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <p className="text-sm">Alex: Hey, are you free this weekend?</p>
-                <span className="text-xs text-gray-500">2h ago</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <p className="text-sm">Emma: Thanks for the birthday wish!</p>
-                <span className="text-xs text-gray-500">5h ago</span>
-              </div>
-            </div>
-          </Card>
+            </Card>
+          ))}
         </motion.div>
       </main>
     </div>
