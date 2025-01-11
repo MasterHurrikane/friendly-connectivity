@@ -464,6 +464,7 @@ export type Database = {
           interests: string[] | null
           language: string | null
           last_name: string | null
+          media_files: Json | null
           milestones: Json | null
           phone_number: string | null
           profile_picture_url: string | null
@@ -488,6 +489,7 @@ export type Database = {
           interests?: string[] | null
           language?: string | null
           last_name?: string | null
+          media_files?: Json | null
           milestones?: Json | null
           phone_number?: string | null
           profile_picture_url?: string | null
@@ -512,6 +514,7 @@ export type Database = {
           interests?: string[] | null
           language?: string | null
           last_name?: string | null
+          media_files?: Json | null
           milestones?: Json | null
           phone_number?: string | null
           profile_picture_url?: string | null
