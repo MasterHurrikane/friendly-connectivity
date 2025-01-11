@@ -172,6 +172,8 @@ const FriendProfile = () => {
             <FriendProfileContent
               friend={friendData}
               friendshipDuration={friendshipDuration}
+              friendConnectionId={friend.id}
+              status={friend.status}
               removeFriendMutation={removeFriendMutation}
               blockFriendMutation={blockFriendMutation}
             />
