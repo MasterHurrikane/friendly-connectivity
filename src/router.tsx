@@ -7,6 +7,7 @@ import { eventRoutes } from "@/routes/eventRoutes";
 import Calendar from "@/pages/Calendar";
 import Dashboard from "@/pages/Dashboard";
 import Index from "@/pages/Index";
+import Profile from "@/pages/Profile";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export const router = createBrowserRouter([
@@ -23,6 +24,11 @@ export const router = createBrowserRouter([
   {
     path: "calendar",
     element: <Calendar />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "profile",
+    element: <Profile />,
     errorElement: <ErrorBoundary />,
   },
   ...authRoutes,
