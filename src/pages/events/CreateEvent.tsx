@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Calendar, MapPin, Image, Globe2, Lock, Users } from "lucide-react";
+import { Calendar, MapPin, Image, Globe2, Lock, Users, Upload, X } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { PageHeader } from "@/components/layout/PageHeader";
 import Navigation from "@/components/Navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 import {
   Form,
   FormControl,
@@ -30,12 +31,16 @@ interface EventFormData {
   time: string;
   location: string;
   visibility: "public" | "private" | "invite-only";
-  image?: FileList;
+  headerImage?: File;
+  eventPhotos?: FileList;
 }
 
 const CreateEvent = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [isVirtual, setIsVirtual] = useState(false);
+  const [headerImagePreview, setHeaderImagePreview] = useState<string | null>(null);
+  const [eventPhotosPreviews, setEventPhotosPreviews] = useState<string[]>([]);
   
   const form = useForm<EventFormData>({
     defaultValues: {
@@ -47,6 +52,55 @@ const CreateEvent = () => {
       visibility: "private",
     },
   });
+
+  const handleHeaderImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        toast({
+          title: "File too large",
+          description: "Header image must be less than 5MB",
+          variant: "destructive",
+        });
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setHeaderImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+      form.setValue("headerImage", file);
+    }
+  };
+
+  const handleEventPhotosChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      const previews: string[] = [];
+      Array.from(files).forEach(file => {
+        if (file.size > 5 * 1024 * 1024) {
+          toast({
+            title: "File too large",
+            description: `${file.name} is too large. Each photo must be less than 5MB`,
+            variant: "destructive",
+          });
+          return;
+        }
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          previews.push(reader.result as string);
+          setEventPhotosPreviews([...previews]);
+        };
+        reader.readAsDataURL(file);
+      });
+      form.setValue("eventPhotos", files);
+    }
+  };
+
+  const removeHeaderImage = () => {
+    setHeaderImagePreview(null);
+    form.setValue("headerImage", undefined);
+  };
 
   const onSubmit = (data: EventFormData) => {
     // Here you would typically send the data to your backend
@@ -68,6 +122,45 @@ const CreateEvent = () => {
         <div className="max-w-2xl mx-auto mt-6">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="headerImage"
+                render={({ field: { value, onChange, ...field } }) => (
+                  <FormItem>
+                    <FormLabel>Event Header Image</FormLabel>
+                    <FormControl>
+                      <div className="space-y-4">
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          onChange={handleHeaderImageChange}
+                          {...field}
+                        />
+                        {headerImagePreview && (
+                          <div className="relative">
+                            <img
+                              src={headerImagePreview}
+                              alt="Header preview"
+                              className="w-full h-48 object-cover rounded-lg"
+                            />
+                            <Button
+                              type="button"
+                              variant="destructive"
+                              size="icon"
+                              className="absolute top-2 right-2"
+                              onClick={removeHeaderImage}
+                            >
+                              <X className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        )}
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <FormField
                 control={form.control}
                 name="title"
@@ -216,17 +309,33 @@ const CreateEvent = () => {
 
               <FormField
                 control={form.control}
-                name="image"
+                name="eventPhotos"
                 render={({ field: { value, onChange, ...field } }) => (
                   <FormItem>
-                    <FormLabel>Event Image or Theme</FormLabel>
+                    <FormLabel>Additional Event Photos</FormLabel>
                     <FormControl>
-                      <Input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => onChange(e.target.files)}
-                        {...field}
-                      />
+                      <div className="space-y-4">
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          onChange={handleEventPhotosChange}
+                          {...field}
+                        />
+                        {eventPhotosPreviews.length > 0 && (
+                          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                            {eventPhotosPreviews.map((preview, index) => (
+                              <div key={index} className="relative aspect-square">
+                                <img
+                                  src={preview}
+                                  alt={`Event photo ${index + 1}`}
+                                  className="w-full h-full object-cover rounded-lg"
+                                />
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
