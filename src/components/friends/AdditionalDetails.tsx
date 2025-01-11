@@ -18,7 +18,7 @@ export const AdditionalDetails = ({ form }: AdditionalDetailsProps) => {
             name="city"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-left">City</FormLabel>
+                <FormLabel className="text-left block">City</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter city" {...field} />
                 </FormControl>
@@ -32,7 +32,7 @@ export const AdditionalDetails = ({ form }: AdditionalDetailsProps) => {
             name="timezone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-left">Timezone</FormLabel>
+                <FormLabel className="text-left block">Timezone</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter timezone" {...field} />
                 </FormControl>
@@ -48,7 +48,7 @@ export const AdditionalDetails = ({ form }: AdditionalDetailsProps) => {
             name="favoriteColor"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-left">Favorite Color</FormLabel>
+                <FormLabel className="text-left block">Favorite Color</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter favorite color" {...field} />
                 </FormControl>
@@ -62,7 +62,7 @@ export const AdditionalDetails = ({ form }: AdditionalDetailsProps) => {
             name="lastMeetup"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-left">Last Meetup</FormLabel>
+                <FormLabel className="text-left block">Last Meetup</FormLabel>
                 <FormControl>
                   <Input type="date" {...field} />
                 </FormControl>
@@ -77,7 +77,7 @@ export const AdditionalDetails = ({ form }: AdditionalDetailsProps) => {
           name="notes"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-left">Notes</FormLabel>
+              <FormLabel className="text-left block">Notes</FormLabel>
               <FormControl>
                 <Textarea 
                   placeholder="Add any additional notes about your friend"

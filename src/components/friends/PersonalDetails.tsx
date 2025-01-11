@@ -16,7 +16,7 @@ export const PersonalDetails = ({ form }: PersonalDetailsProps) => {
           name="nickname"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-left">Nickname</FormLabel>
+              <FormLabel className="text-left block">Nickname</FormLabel>
               <FormControl>
                 <Input placeholder="Enter nickname" {...field} />
               </FormControl>
@@ -31,7 +31,7 @@ export const PersonalDetails = ({ form }: PersonalDetailsProps) => {
             name="birthday"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-left">Birthday</FormLabel>
+                <FormLabel className="text-left block">Birthday</FormLabel>
                 <FormControl>
                   <Input type="date" {...field} />
                 </FormControl>
@@ -45,7 +45,7 @@ export const PersonalDetails = ({ form }: PersonalDetailsProps) => {
             name="anniversary"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-left">Anniversary</FormLabel>
+                <FormLabel className="text-left block">Anniversary</FormLabel>
                 <FormControl>
                   <Input type="date" {...field} />
                 </FormControl>
@@ -61,7 +61,7 @@ export const PersonalDetails = ({ form }: PersonalDetailsProps) => {
             name="spouse"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-left">Spouse/Partner Name</FormLabel>
+                <FormLabel className="text-left block">Spouse/Partner Name</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter spouse/partner name" {...field} />
                 </FormControl>
@@ -75,7 +75,7 @@ export const PersonalDetails = ({ form }: PersonalDetailsProps) => {
             name="children"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-left">Children</FormLabel>
+                <FormLabel className="text-left block">Children</FormLabel>
                 <FormControl>
                   <Input placeholder="Enter children's names" {...field} />
                 </FormControl>

@@ -17,7 +17,7 @@ export const BasicFriendInfo = ({ form }: BasicFriendInfoProps) => {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-left">Name</FormLabel>
+              <FormLabel className="text-left block">Name</FormLabel>
               <FormControl>
                 <Input placeholder="Enter friend's name" {...field} />
               </FormControl>
@@ -32,7 +32,7 @@ export const BasicFriendInfo = ({ form }: BasicFriendInfoProps) => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-left">Email</FormLabel>
+                <FormLabel className="text-left block">Email</FormLabel>
                 <FormControl>
                   <Input type="email" placeholder="Enter email" {...field} />
                 </FormControl>
@@ -46,7 +46,7 @@ export const BasicFriendInfo = ({ form }: BasicFriendInfoProps) => {
             name="phone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-left">Phone Number</FormLabel>
+                <FormLabel className="text-left block">Phone Number</FormLabel>
                 <FormControl>
                   <Input type="tel" placeholder="Enter phone number" {...field} />
                 </FormControl>
@@ -61,13 +61,13 @@ export const BasicFriendInfo = ({ form }: BasicFriendInfoProps) => {
           name="category"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-left">Category</FormLabel>
+              <FormLabel className="text-left block">Category</FormLabel>
               <Select
                 defaultValue={field.value}
                 onValueChange={field.onChange}
               >
                 <FormControl>
-                  <SelectTrigger>
+                  <SelectTrigger className="bg-white">
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                 </FormControl>
