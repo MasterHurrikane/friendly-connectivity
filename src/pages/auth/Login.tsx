@@ -14,8 +14,9 @@ import { motion } from "framer-motion"
 import { ArrowLeft } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 import { supabase } from "@/integrations/supabase/client"
-import { AuthError } from "@supabase/supabase-js"
+import { AuthError, AuthApiError } from "@supabase/supabase-js"
 import { Alert, AlertDescription } from "@/components/ui/alert"
+import { toast } from "@/hooks/use-toast"
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -23,6 +24,20 @@ export default function Login() {
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+
+  const getErrorMessage = (error: AuthError) => {
+    if (error instanceof AuthApiError) {
+      switch (error.message) {
+        case "Email not confirmed":
+          return "Please check your email and confirm your account before logging in."
+        case "Invalid login credentials":
+          return "Invalid email or password. Please check your credentials and try again."
+        default:
+          return error.message
+      }
+    }
+    return error.message
+  }
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -37,10 +52,15 @@ export default function Login() {
 
       if (error) throw error
 
+      toast({
+        title: "Success!",
+        description: "You have successfully logged in.",
+      })
+
       navigate("/dashboard")
     } catch (err) {
       const error = err as AuthError
-      setError(error.message)
+      setError(getErrorMessage(error))
     } finally {
       setLoading(false)
     }
