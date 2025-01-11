@@ -61,10 +61,10 @@ const AddFriend = () => {
           icon={UserPlus}
         />
         
-        <div className="max-w-2xl mx-auto mt-6">
+        <div className="max-w-3xl mx-auto mt-6">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-border">
+              <div className="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-sm border border-border/10">
                 <h3 className="text-lg font-semibold mb-4">Basic Information</h3>
                 <div className="space-y-4">
                   <FormField
@@ -74,7 +74,7 @@ const AddFriend = () => {
                       <FormItem>
                         <FormLabel>Name</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter friend's name" {...field} className="bg-white" />
+                          <Input placeholder="Enter friend's name" {...field} className="bg-white/50" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -89,7 +89,7 @@ const AddFriend = () => {
                         <FormItem>
                           <FormLabel>Email</FormLabel>
                           <FormControl>
-                            <Input type="email" placeholder="Enter email" {...field} className="bg-white" />
+                            <Input type="email" placeholder="Enter email" {...field} className="bg-white/50" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -103,7 +103,7 @@ const AddFriend = () => {
                         <FormItem>
                           <FormLabel>Phone Number</FormLabel>
                           <FormControl>
-                            <Input type="tel" placeholder="Enter phone number" {...field} className="bg-white" />
+                            <Input type="tel" placeholder="Enter phone number" {...field} className="bg-white/50" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -122,11 +122,11 @@ const AddFriend = () => {
                           onValueChange={field.onChange}
                         >
                           <FormControl>
-                            <SelectTrigger className="bg-white">
+                            <SelectTrigger className="bg-white/50">
                               <SelectValue placeholder="Select category" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent className="bg-white">
+                          <SelectContent>
                             <SelectItem value="friend">Friend</SelectItem>
                             <SelectItem value="family">Family</SelectItem>
                             <SelectItem value="colleague">Colleague</SelectItem>
@@ -140,7 +140,7 @@ const AddFriend = () => {
                 </div>
               </div>
 
-              <div className="bg-white p-6 rounded-lg shadow-sm border border-border">
+              <div className="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-sm border border-border/10">
                 <h3 className="text-lg font-semibold mb-4">Additional Details</h3>
                 <div className="space-y-4">
                   <FormField
@@ -150,7 +150,7 @@ const AddFriend = () => {
                       <FormItem>
                         <FormLabel>Nickname</FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter nickname" {...field} className="bg-white" />
+                          <Input placeholder="Enter nickname" {...field} className="bg-white/50" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -165,7 +165,7 @@ const AddFriend = () => {
                         <FormItem>
                           <FormLabel>Birthday</FormLabel>
                           <FormControl>
-                            <Input type="date" {...field} className="bg-white" />
+                            <Input type="date" {...field} className="bg-white/50" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -179,7 +179,7 @@ const AddFriend = () => {
                         <FormItem>
                           <FormLabel>Anniversary</FormLabel>
                           <FormControl>
-                            <Input type="date" {...field} className="bg-white" />
+                            <Input type="date" {...field} className="bg-white/50" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -195,7 +195,7 @@ const AddFriend = () => {
                         <FormItem>
                           <FormLabel>Spouse/Partner Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter spouse/partner name" {...field} className="bg-white" />
+                            <Input placeholder="Enter spouse/partner name" {...field} className="bg-white/50" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -209,7 +209,7 @@ const AddFriend = () => {
                         <FormItem>
                           <FormLabel>Children</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter children's names" {...field} className="bg-white" />
+                            <Input placeholder="Enter children's names" {...field} className="bg-white/50" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -225,7 +225,7 @@ const AddFriend = () => {
                         <FormItem>
                           <FormLabel>City</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter city" {...field} className="bg-white" />
+                            <Input placeholder="Enter city" {...field} className="bg-white/50" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -239,7 +239,7 @@ const AddFriend = () => {
                         <FormItem>
                           <FormLabel>Timezone</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter timezone" {...field} className="bg-white" />
+                            <Input placeholder="Enter timezone" {...field} className="bg-white/50" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -255,7 +255,7 @@ const AddFriend = () => {
                         <FormItem>
                           <FormLabel>Favorite Color</FormLabel>
                           <FormControl>
-                            <Input placeholder="Enter favorite color" {...field} className="bg-white" />
+                            <Input placeholder="Enter favorite color" {...field} className="bg-white/50" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -269,7 +269,7 @@ const AddFriend = () => {
                         <FormItem>
                           <FormLabel>Last Meetup</FormLabel>
                           <FormControl>
-                            <Input type="date" {...field} className="bg-white" />
+                            <Input type="date" {...field} className="bg-white/50" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -286,7 +286,7 @@ const AddFriend = () => {
                         <FormControl>
                           <Textarea 
                             placeholder="Add any additional notes about your friend"
-                            className="bg-white"
+                            className="bg-white/50"
                             {...field}
                           />
                         </FormControl>
@@ -302,7 +302,7 @@ const AddFriend = () => {
                   type="button"
                   variant="outline"
                   onClick={() => navigate(-1)}
-                  className="bg-white"
+                  className="bg-white/95"
                 >
                   Cancel
                 </Button>
