@@ -12,7 +12,7 @@ export const PageHeader = ({ title, description, icon: Icon }: PageHeaderProps) 
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="mb-8"
+      className="mb-8 text-left"
     >
       <div className="flex items-center space-x-4">
         <Icon className="w-10 h-10 text-primary" />

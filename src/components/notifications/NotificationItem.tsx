@@ -57,7 +57,7 @@ export const NotificationItem = ({
       className="mb-4"
     >
       <Card className={`p-4 ${read ? 'bg-card/50' : 'bg-card shadow-lg'}`}>
-        <div className="flex items-start gap-4">
+        <div className="flex items-start gap-4 text-left">
           <div className={`p-2 rounded-full ${priority ? 'bg-destructive/20' : 'bg-primary/20'}`}>
             <Icon className={`w-5 h-5 ${priority ? 'text-destructive' : 'text-primary'}`} />
           </div>

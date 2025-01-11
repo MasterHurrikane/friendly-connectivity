@@ -17,7 +17,9 @@ const FriendProfile = () => {
       <div className="min-h-screen bg-gradient-page">
         <Navigation />
         <main className="p-6 md:ml-64">
-          <h1>Friend not found</h1>
+          <div className="text-left">
+            <h1>Friend not found</h1>
+          </div>
         </main>
       </div>
     );
@@ -41,23 +43,25 @@ const FriendProfile = () => {
     <div className="min-h-screen bg-gradient-page">
       <Navigation />
       <main className="p-6 md:ml-64">
-        <PageHeader
-          title={friend.name}
-          description={`View and manage ${friend.name}'s profile`}
-          icon={Heart}
-        />
-        
-        <div className="max-w-4xl mx-auto space-y-6 mt-6">
-          <Card>
-            <CardContent className="p-6">
-              <FriendBasicInfo 
-                friend={friend} 
-                friendshipDuration={calculateFriendshipDuration(friend.metDate)} 
-              />
-              <Separator className="my-6" />
-              <FriendDetails friend={friend} />
-            </CardContent>
-          </Card>
+        <div className="text-left">
+          <PageHeader
+            title={friend.name}
+            description={`View and manage ${friend.name}'s profile`}
+            icon={Heart}
+          />
+          
+          <div className="max-w-4xl mx-auto space-y-6 mt-6">
+            <Card>
+              <CardContent className="p-6">
+                <FriendBasicInfo 
+                  friend={friend} 
+                  friendshipDuration={calculateFriendshipDuration(friend.metDate)} 
+                />
+                <Separator className="my-6" />
+                <FriendDetails friend={friend} />
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </main>
     </div>

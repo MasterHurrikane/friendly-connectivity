@@ -53,23 +53,25 @@ const Dashboard = () => {
     <div className="min-h-screen bg-gradient-page">
       <Navigation />
       <main className="p-6 md:ml-64">
-        <div className="mb-6">
-          <img
-            src="/lovable-uploads/f5f0433b-454b-4240-8e58-f20d8836ec72.png"
-            alt="Friendly Logo"
-            className="w-32 h-auto mb-4"
+        <div className="text-left">
+          <div className="mb-6">
+            <img
+              src="/lovable-uploads/f5f0433b-454b-4240-8e58-f20d8836ec72.png"
+              alt="Friendly Logo"
+              className="w-32 h-auto"
+            />
+          </div>
+          <PageHeader
+            title="Dashboard"
+            description="Welcome to your personal relationship manager"
+            icon={LayoutDashboard}
           />
-        </div>
-        <PageHeader
-          title="Dashboard"
-          description="Welcome to your personal relationship manager"
-          icon={LayoutDashboard}
-        />
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {dashboardCards.map((card) => (
-            <DashboardCard key={card.title} {...card} />
-          ))}
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {dashboardCards.map((card) => (
+              <DashboardCard key={card.title} {...card} />
+            ))}
+          </div>
         </div>
       </main>
     </div>
