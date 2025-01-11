@@ -1,16 +1,13 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { Heart, UserX, MessageCircle, Calendar, Activity } from "lucide-react";
+import { Heart } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { FriendBasicInfo } from "@/components/friend/FriendBasicInfo";
-import { FriendDetails } from "@/components/friend/FriendDetails";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
 import { Friend } from "@/data/dummyFriends";
+import { FriendProfileContent } from "@/components/friend/FriendProfileContent";
+import { calculateFriendshipDuration } from "@/utils/friendUtils";
 
 const FriendProfile = () => {
   const { id } = useParams();
@@ -141,16 +138,15 @@ const FriendProfile = () => {
     ? calculateFriendshipDuration(friend.friendship_date)
     : "Recently added";
 
-  // Map the Supabase data to our Friend interface
   const friendData: Friend = {
     id: friend.friend.id,
     name: friendName,
-    avatar: "", // TODO: Add avatar support
+    avatar: "",
     category: friend.relationship_type || "Friend",
     lastInteraction: friend.last_interaction || undefined,
     metDate: friend.friendship_date,
-    email: "",  // These fields are not in the current Supabase schema
-    phone: "",  // but are required by the Friend interface
+    email: "",
+    phone: "",
     birthday: "",
     city: "",
     timezone: "",
@@ -173,84 +169,17 @@ const FriendProfile = () => {
           />
           
           <div className="max-w-4xl mx-auto space-y-6 mt-6">
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex justify-between items-start mb-6">
-                  <FriendBasicInfo 
-                    friend={friendData}
-                    friendshipDuration={friendshipDuration}
-                  />
-                  <div className="flex gap-2">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => navigate(`/friends/${id}/activity`)}
-                    >
-                      <Activity className="w-4 h-4 mr-2" />
-                      Activity
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => navigate(`/friends/${id}/message`)}
-                    >
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                      Message
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        if (window.confirm("Are you sure you want to remove this friend?")) {
-                          removeFriendMutation.mutate();
-                        }
-                      }}
-                    >
-                      <UserX className="w-4 h-4 mr-2" />
-                      Remove
-                    </Button>
-                  </div>
-                </div>
-
-                <Separator className="my-6" />
-
-                <FriendDetails friend={friendData} />
-
-                <Separator className="my-6" />
-
-                <div className="mt-6">
-                  <Button
-                    variant="destructive"
-                    onClick={() => {
-                      if (window.confirm("Are you sure you want to block this user? This action cannot be undone.")) {
-                        blockFriendMutation.mutate();
-                      }
-                    }}
-                  >
-                    Block User
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            <FriendProfileContent
+              friend={friendData}
+              friendshipDuration={friendshipDuration}
+              removeFriendMutation={removeFriendMutation}
+              blockFriendMutation={blockFriendMutation}
+            />
           </div>
         </div>
       </main>
     </div>
   );
-};
-
-const calculateFriendshipDuration = (date: string) => {
-  const start = new Date(date);
-  const now = new Date();
-  const diffTime = Math.abs(now.getTime() - start.getTime());
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  const years = Math.floor(diffDays / 365);
-  const months = Math.floor((diffDays % 365) / 30);
-  
-  if (years > 0) {
-    return `${years} year${years > 1 ? 's' : ''} and ${months} month${months > 1 ? 's' : ''}`;
-  }
-  return `${months} month${months > 1 ? 's' : ''}`;
 };
 
 export default FriendProfile;
