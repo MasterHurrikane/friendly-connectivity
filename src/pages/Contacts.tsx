@@ -38,7 +38,7 @@ const dummyContacts = [
 
 const Contacts = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-page">
       <Navigation />
       <main className="p-6 md:ml-64">
         <PageHeader
@@ -54,7 +54,7 @@ const Contacts = () => {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Contacts
+export default Contacts;

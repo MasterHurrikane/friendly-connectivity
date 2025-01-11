@@ -29,7 +29,7 @@ const dummyEvents = [
 
 const Calendar = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-page">
       <Navigation />
       <main className="p-6 md:ml-64">
         <PageHeader
@@ -64,7 +64,7 @@ const Calendar = () => {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Calendar
+export default Calendar;
