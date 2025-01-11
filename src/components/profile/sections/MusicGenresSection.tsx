@@ -30,7 +30,7 @@ export const MusicGenresSection = ({ profile, onUpdate }: MusicGenresSectionProp
 
   return (
     <div className="space-y-3">
-      <Label htmlFor="musicGenres" className="text-left block">Favorite Music Genres</Label>
+      <Label htmlFor="musicGenres" className="text-left block text-lg font-bold">Favorite Music Genres</Label>
       <div className="flex flex-wrap gap-2 min-h-[2.5rem]">
         {profile?.favorite_music_genres?.map((genre: string) => (
           <Badge 

@@ -30,7 +30,7 @@ export const InterestsSection = ({ profile, onUpdate }: InterestsSectionProps) =
 
   return (
     <div className="space-y-3">
-      <Label htmlFor="interests" className="text-left block">Interests</Label>
+      <Label htmlFor="interests" className="text-left block text-lg font-bold">Interests</Label>
       <div className="flex flex-wrap gap-2 min-h-[2.5rem]">
         {profile?.interests?.map((interest: string) => (
           <Badge 

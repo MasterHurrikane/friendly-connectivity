@@ -61,11 +61,11 @@ export const AdditionalInfoSection = () => {
       icon={FileText}
     >
       <div className="space-y-8">
-        <InterestsSection profile={profile} onUpdate={handleUpdate} />
-        <HobbiesSection profile={profile} onUpdate={handleUpdate} />
-        <FoodTypesSection profile={profile} onUpdate={handleUpdate} />
-        <MusicGenresSection profile={profile} onUpdate={handleUpdate} />
         <FavoriteColorsSection profile={profile} onUpdate={handleUpdate} />
+        <FoodTypesSection profile={profile} onUpdate={handleUpdate} />
+        <HobbiesSection profile={profile} onUpdate={handleUpdate} />
+        <InterestsSection profile={profile} onUpdate={handleUpdate} />
+        <MusicGenresSection profile={profile} onUpdate={handleUpdate} />
       </div>
     </ProfileSection>
   );
