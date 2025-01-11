@@ -65,33 +65,36 @@ const ActivityFeed = () => {
         />
 
         <div className="mt-6 space-y-4">
-          {recentActivity.map((activity, index) => (
-            <motion.div
-              key={activity.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-card p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className="flex items-start space-x-4">
-                <div className="p-2 bg-primary/10 rounded-full">
-                  {getIconForType(activity.type)({ className: "w-5 h-5 text-primary" })}
+          {recentActivity.map((activity, index) => {
+            const IconComponent = getIconForType(activity.type);
+            return (
+              <motion.div
+                key={activity.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-card p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="flex items-start space-x-4">
+                  <div className="p-2 bg-primary/10 rounded-full">
+                    <IconComponent className="w-5 h-5 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-medium text-foreground">
+                      {getContactName(activity.contactId)}
+                    </p>
+                    <p className="text-sm text-gray-600">{activity.content}</p>
+                    <p className="text-xs text-gray-500 mt-1">
+                      {new Date(activity.date).toLocaleDateString()}
+                    </p>
+                  </div>
+                  <button className="p-2 hover:bg-accent rounded-full transition-colors">
+                    <Heart className="w-5 h-5 text-gray-400 hover:text-secondary" />
+                  </button>
                 </div>
-                <div className="flex-1">
-                  <p className="font-medium text-foreground">
-                    {getContactName(activity.contactId)}
-                  </p>
-                  <p className="text-sm text-gray-600">{activity.content}</p>
-                  <p className="text-xs text-gray-500 mt-1">
-                    {new Date(activity.date).toLocaleDateString()}
-                  </p>
-                </div>
-                <button className="p-2 hover:bg-accent rounded-full transition-colors">
-                  <Heart className="w-5 h-5 text-gray-400 hover:text-secondary" />
-                </button>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </main>
     </div>
