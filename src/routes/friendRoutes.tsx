@@ -1,6 +1,8 @@
 import Friends from "@/pages/Friends";
 import FriendProfile from "@/pages/FriendProfile";
 import AddFriend from "@/pages/friends/AddFriend";
+import ManageGroups from "@/pages/friends/ManageGroups";
+import GroupDetails from "@/pages/friends/GroupDetails";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export const friendRoutes = [
@@ -17,6 +19,16 @@ export const friendRoutes = [
   {
     path: "add-friend",
     element: <AddFriend />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "friends/groups",
+    element: <ManageGroups />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "friends/groups/:id",
+    element: <GroupDetails />,
     errorElement: <ErrorBoundary />,
   },
 ];
