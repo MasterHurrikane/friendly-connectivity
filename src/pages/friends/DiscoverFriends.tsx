@@ -90,7 +90,7 @@ const DiscoverFriends = () => {
             <Badge
               key={category}
               variant="secondary"
-              className="cursor-pointer hover:bg-primary hover:text-primary-foreground"
+              className="cursor-pointer hover:bg-[#8e3a9f] transition-colors"
             >
               {category}
             </Badge>
@@ -119,7 +119,7 @@ const DiscoverFriends = () => {
                       <p className="text-sm text-gray-500">{friend.city}</p>
                       <div className="mt-2 space-x-2">
                         {friend.interests?.slice(0, 2).map((interest) => (
-                          <Badge key={interest} variant="outline">
+                          <Badge key={interest} variant="secondary">
                             {interest}
                           </Badge>
                         ))}
