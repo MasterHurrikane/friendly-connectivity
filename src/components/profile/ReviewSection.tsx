@@ -14,7 +14,7 @@ export const ReviewSection = () => {
           Please review your profile information before saving changes.
         </p>
         <div className="flex space-x-4">
-          <Button variant="outline" className="bg-white/50 hover:bg-white/80">Cancel</Button>
+          <Button variant="outline" className="bg-white hover:bg-white/80">Cancel</Button>
           <Button variant="secondary">Save Changes</Button>
         </div>
       </div>

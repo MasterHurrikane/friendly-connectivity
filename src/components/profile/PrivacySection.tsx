@@ -11,7 +11,7 @@ export const PrivacySection = () => {
       icon={Lock}
     >
       <div className="space-y-4">
-        <div className="flex items-center justify-between bg-white/50 p-3 rounded-md">
+        <div className="flex items-center justify-between bg-white p-3 rounded-md">
           <div>
             <Label className="block text-left">Profile Visibility</Label>
             <p className="text-sm text-gray-600">Make your profile visible to others</p>
@@ -19,7 +19,7 @@ export const PrivacySection = () => {
           <Switch defaultChecked />
         </div>
         
-        <div className="flex items-center justify-between bg-white/50 p-3 rounded-md">
+        <div className="flex items-center justify-between bg-white p-3 rounded-md">
           <div>
             <Label className="block text-left">Activity Status</Label>
             <p className="text-sm text-gray-600">Show when you're online</p>
@@ -27,7 +27,7 @@ export const PrivacySection = () => {
           <Switch defaultChecked />
         </div>
 
-        <div className="flex items-center justify-between bg-white/50 p-3 rounded-md">
+        <div className="flex items-center justify-between bg-white p-3 rounded-md">
           <div>
             <Label className="block text-left">Search Visibility</Label>
             <p className="text-sm text-gray-600">Allow others to find you in search</p>

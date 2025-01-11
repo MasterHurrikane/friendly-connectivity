@@ -15,13 +15,13 @@ export const AdditionalInfoSection = () => {
           <Label htmlFor="bio" className="block mb-1.5 text-left">Bio</Label>
           <textarea
             id="bio"
-            className="w-full min-h-[100px] p-2 border rounded-md bg-white/50"
+            className="w-full min-h-[100px] p-2 border rounded-md bg-white"
             placeholder="Tell us about yourself..."
           />
         </div>
         <div>
           <Label htmlFor="location" className="block mb-1.5 text-left">Location</Label>
-          <Input id="location" placeholder="City, Country" className="bg-white/50" />
+          <Input id="location" placeholder="City, Country" className="bg-white" />
         </div>
       </div>
     </ProfileSection>
