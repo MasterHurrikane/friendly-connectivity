@@ -1,12 +1,11 @@
 import { useState } from "react"
-import { Calendar as CalendarIcon, Clock, Plus, BellRing } from "lucide-react"
+import { Calendar as CalendarIcon, BellPlus, CalendarPlus } from "lucide-react"
 import Navigation from "@/components/Navigation"
 import { PageHeader } from "@/components/layout/PageHeader"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Calendar } from "@/components/ui/calendar"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { format } from "date-fns"
 import { useToast } from "@/hooks/use-toast"
 import { CreateEventDialog } from "@/components/calendar/CreateEventDialog"
@@ -51,6 +50,22 @@ const CalendarPage = () => {
     })
   }
 
+  const handleAddReminder = () => {
+    const reminder: CalendarEvent = {
+      id: Math.random().toString(36).substr(2, 9),
+      title: "New Reminder",
+      date: date || new Date(),
+      time: format(new Date(), "HH:mm"),
+      type: "reminder",
+      notification: true
+    }
+    setEvents([...events, reminder])
+    toast({
+      title: "Reminder Created",
+      description: "Your reminder has been added to the calendar."
+    })
+  }
+
   const selectedDateEvents = events.filter(
     event => date && format(event.date, "yyyy-MM-dd") === format(date, "yyyy-MM-dd")
   )
@@ -78,7 +93,17 @@ const CalendarPage = () => {
               </CardContent>
             </Card>
 
-            <CreateEventDialog onAddEvent={handleAddEvent} />
+            <div className="space-y-2">
+              <CreateEventDialog onAddEvent={handleAddEvent} />
+              <Button 
+                variant="outline" 
+                className="w-full"
+                onClick={handleAddReminder}
+              >
+                <BellPlus className="w-4 h-4 mr-2" />
+                Add Reminder
+              </Button>
+            </div>
           </div>
 
           <div className="space-y-4">
