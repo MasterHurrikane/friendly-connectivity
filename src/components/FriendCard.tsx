@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { ContactAvatar } from "./contact/ContactAvatar";
-import { ContactHeader } from "./contact/ContactHeader";
+import { FriendAvatar } from "./friend/FriendAvatar";
+import { FriendHeader } from "./friend/FriendHeader";
 
-interface ContactCardProps {
-  contact: {
+interface FriendCardProps {
+  friend: {
     id: string;
     name: string;
     nickname?: string;
@@ -23,7 +23,7 @@ interface ContactCardProps {
   };
 }
 
-const ContactCard = ({ contact }: ContactCardProps) => {
+const FriendCard = ({ friend }: FriendCardProps) => {
   const navigate = useNavigate();
 
   const handleFavorite = (e: React.MouseEvent) => {
@@ -32,7 +32,7 @@ const ContactCard = ({ contact }: ContactCardProps) => {
   };
 
   const handleCardClick = () => {
-    navigate(`/contacts/${contact.id}`);
+    navigate(`/friends/${friend.id}`);
   };
 
   return (
@@ -43,17 +43,17 @@ const ContactCard = ({ contact }: ContactCardProps) => {
       onClick={handleCardClick}
     >
       <div className="flex items-start space-x-4">
-        <ContactAvatar avatar={contact.avatar} name={contact.name} />
+        <FriendAvatar avatar={friend.avatar} name={friend.name} />
         <div className="flex-1">
-          <ContactHeader
-            name={contact.name}
-            nickname={contact.nickname}
-            category={contact.category}
-            metDate={contact.metDate}
+          <FriendHeader
+            name={friend.name}
+            nickname={friend.nickname}
+            category={friend.category}
+            metDate={friend.metDate}
             onFavorite={handleFavorite}
           />
           <p className="text-sm text-gray-500 mt-4">
-            Last interaction: {contact.lastInteraction}
+            Last interaction: {friend.lastInteraction}
           </p>
         </div>
       </div>
@@ -61,4 +61,4 @@ const ContactCard = ({ contact }: ContactCardProps) => {
   );
 };
 
-export default ContactCard;
+export default FriendCard;

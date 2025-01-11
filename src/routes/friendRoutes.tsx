@@ -1,22 +1,22 @@
-import Contacts from "@/pages/Contacts";
-import ContactProfile from "@/pages/ContactProfile";
-import AddContact from "@/pages/AddContact";
+import Friends from "@/pages/Friends";
+import FriendProfile from "@/pages/FriendProfile";
+import AddFriend from "@/pages/friends/AddFriend";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
-export const contactRoutes = [
+export const friendRoutes = [
   {
-    path: "/contacts",
-    element: <Contacts />,
+    path: "/friends",
+    element: <Friends />,
     errorElement: <ErrorBoundary />,
   },
   {
-    path: "/contact/:id",
-    element: <ContactProfile />,
+    path: "/friends/:id",
+    element: <FriendProfile />,
     errorElement: <ErrorBoundary />,
   },
   {
-    path: "/add-contact",
-    element: <AddContact />,
+    path: "/add-friend",
+    element: <AddFriend />,
     errorElement: <ErrorBoundary />,
   },
 ];

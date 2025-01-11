@@ -1,7 +1,8 @@
-import { Heart } from "lucide-react";
+import { Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-interface ContactHeaderProps {
+interface FriendHeaderProps {
   name: string;
   nickname?: string;
   category: string;
@@ -9,40 +10,29 @@ interface ContactHeaderProps {
   onFavorite: (e: React.MouseEvent) => void;
 }
 
-export const ContactHeader = ({ name, nickname, category, metDate, onFavorite }: ContactHeaderProps) => {
-  const calculateFriendshipDuration = (date: string) => {
-    if (!date) return "";
-    const start = new Date(date);
-    const now = new Date();
-    const diffTime = Math.abs(now.getTime() - start.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return `Friends for ${diffDays} days`;
-  };
-
+export const FriendHeader = ({ name, nickname, category, metDate, onFavorite }: FriendHeaderProps) => {
   return (
-    <div>
-      <div className="flex items-center justify-between">
-        <div>
-          <h3 className="font-semibold text-lg">{name}</h3>
-          {nickname && (
-            <p className="text-sm text-gray-500">"{nickname}"</p>
+    <div className="flex justify-between items-start">
+      <div>
+        <h3 className="text-lg font-semibold">{name}</h3>
+        {nickname && <p className="text-sm text-gray-500">"{nickname}"</p>}
+        <div className="flex items-center gap-2 mt-2">
+          <Badge variant="secondary">{category}</Badge>
+          {metDate && (
+            <Badge variant="outline">
+              Met on {new Date(metDate).toLocaleDateString()}
+            </Badge>
           )}
         </div>
-        <button 
-          className="text-gray-400 hover:text-secondary transition-colors"
-          onClick={onFavorite}
-        >
-          <Heart className="w-5 h-5" />
-        </button>
       </div>
-      <Badge variant="secondary" className="mt-1">
-        {category}
-      </Badge>
-      {metDate && (
-        <p className="text-xs text-gray-500 mt-1">
-          {calculateFriendshipDuration(metDate)}
-        </p>
-      )}
+      <Button
+        variant="ghost"
+        size="icon"
+        className="text-gray-400 hover:text-yellow-400"
+        onClick={onFavorite}
+      >
+        <Star className="h-5 w-5" />
+      </Button>
     </div>
   );
 };

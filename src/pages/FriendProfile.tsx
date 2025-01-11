@@ -4,20 +4,20 @@ import Navigation from "@/components/Navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { ContactBasicInfo } from "@/components/contact/ContactBasicInfo";
-import { ContactDetails } from "@/components/contact/ContactDetails";
-import { dummyContacts } from "@/data/dummyContacts";
+import { FriendBasicInfo } from "@/components/friend/FriendBasicInfo";
+import { FriendDetails } from "@/components/friend/FriendDetails";
+import { dummyFriends } from "@/data/dummyFriends";
 
-const ContactProfile = () => {
+const FriendProfile = () => {
   const { id } = useParams();
-  const contact = dummyContacts.find(c => c.id === id);
+  const friend = dummyFriends.find(c => c.id === id);
 
-  if (!contact) {
+  if (!friend) {
     return (
       <div className="min-h-screen bg-gradient-page">
         <Navigation />
         <main className="p-6 md:ml-64">
-          <h1>Contact not found</h1>
+          <h1>Friend not found</h1>
         </main>
       </div>
     );
@@ -42,20 +42,20 @@ const ContactProfile = () => {
       <Navigation />
       <main className="p-6 md:ml-64">
         <PageHeader
-          title={contact.name}
-          description={`View and manage ${contact.name}'s profile`}
+          title={friend.name}
+          description={`View and manage ${friend.name}'s profile`}
           icon={Heart}
         />
         
         <div className="max-w-4xl mx-auto space-y-6 mt-6">
           <Card>
             <CardContent className="p-6">
-              <ContactBasicInfo 
-                contact={contact} 
-                friendshipDuration={calculateFriendshipDuration(contact.metDate)} 
+              <FriendBasicInfo 
+                friend={friend} 
+                friendshipDuration={calculateFriendshipDuration(friend.metDate)} 
               />
               <Separator className="my-6" />
-              <ContactDetails contact={contact} />
+              <FriendDetails friend={friend} />
             </CardContent>
           </Card>
         </div>
@@ -64,4 +64,4 @@ const ContactProfile = () => {
   );
 };
 
-export default ContactProfile;
+export default FriendProfile;
