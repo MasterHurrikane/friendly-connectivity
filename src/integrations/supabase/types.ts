@@ -45,6 +45,44 @@ export type Database = {
           },
         ]
       }
+      event_analytics: {
+        Row: {
+          attendees_count: number | null
+          created_at: string | null
+          event_id: string
+          id: string
+          invites_sent: number | null
+          rsvp_rate: number | null
+          user_id: string | null
+        }
+        Insert: {
+          attendees_count?: number | null
+          created_at?: string | null
+          event_id: string
+          id?: string
+          invites_sent?: number | null
+          rsvp_rate?: number | null
+          user_id?: string | null
+        }
+        Update: {
+          attendees_count?: number | null
+          created_at?: string | null
+          event_id?: string
+          id?: string
+          invites_sent?: number | null
+          rsvp_rate?: number | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_analytics_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       friend_group_members: {
         Row: {
           created_at: string
@@ -148,34 +186,40 @@ export type Database = {
       friends: {
         Row: {
           created_at: string | null
+          engagement_score: number | null
           friend_id: string
           friendship_date: string | null
           id: string
           interaction_count: number | null
           last_interaction: string | null
           relationship_type: string | null
+          response_time_avg: unknown | null
           status: string
           user_id: string
         }
         Insert: {
           created_at?: string | null
+          engagement_score?: number | null
           friend_id: string
           friendship_date?: string | null
           id?: string
           interaction_count?: number | null
           last_interaction?: string | null
           relationship_type?: string | null
+          response_time_avg?: unknown | null
           status?: string
           user_id: string
         }
         Update: {
           created_at?: string | null
+          engagement_score?: number | null
           friend_id?: string
           friendship_date?: string | null
           id?: string
           interaction_count?: number | null
           last_interaction?: string | null
           relationship_type?: string | null
+          response_time_avg?: unknown | null
           status?: string
           user_id?: string
         }
@@ -308,6 +352,38 @@ export type Database = {
           visibility?: string | null
         }
         Relationships: []
+      }
+      user_activity_metrics: {
+        Row: {
+          id: string
+          metric_type: string
+          metric_value: Json
+          recorded_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          id?: string
+          metric_type: string
+          metric_value: Json
+          recorded_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          id?: string
+          metric_type?: string
+          metric_value?: Json
+          recorded_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_activity_metrics_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
