@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Heart, Phone, Mail, Calendar, MapPin, Clock, Users } from "lucide-react";
+import { Heart, Phone, Mail, Calendar, MapPin, Clock, Users, ChevronDown, ChevronUp } from "lucide-react";
+import { useState } from "react";
 
 interface ContactCardProps {
   contact: {
@@ -22,6 +23,8 @@ interface ContactCardProps {
 }
 
 const ContactCard = ({ contact }: ContactCardProps) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   const calculateFriendshipDuration = (metDate: string) => {
     if (!metDate) return "";
     const start = new Date(metDate);
@@ -35,7 +38,8 @@ const ContactCard = ({ contact }: ContactCardProps) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300"
+      className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 cursor-pointer"
+      onClick={() => setIsExpanded(!isExpanded)}
     >
       <div className="flex items-start space-x-4">
         <div className="relative">
@@ -54,9 +58,22 @@ const ContactCard = ({ contact }: ContactCardProps) => {
                 <p className="text-sm text-gray-500">"{contact.nickname}"</p>
               )}
             </div>
-            <button className="text-gray-400 hover:text-secondary transition-colors">
-              <Heart className="w-5 h-5" />
-            </button>
+            <div className="flex items-center gap-2">
+              <button 
+                className="text-gray-400 hover:text-secondary transition-colors"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  // Handle favorite action
+                }}
+              >
+                <Heart className="w-5 h-5" />
+              </button>
+              {isExpanded ? (
+                <ChevronUp className="w-5 h-5 text-gray-400" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-gray-400" />
+              )}
+            </div>
           </div>
           <span className="inline-block px-2 py-1 bg-primary/10 text-primary text-xs rounded-full mt-1">
             {contact.category}
@@ -66,50 +83,60 @@ const ContactCard = ({ contact }: ContactCardProps) => {
               {calculateFriendshipDuration(contact.metDate)}
             </p>
           )}
-          <div className="mt-4 space-y-2 text-sm text-gray-600">
-            <div className="flex items-center space-x-2">
-              <Phone className="w-4 h-4" />
-              <span>{contact.phone}</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Mail className="w-4 h-4" />
-              <span>{contact.email}</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Calendar className="w-4 h-4" />
-              <span>{contact.birthday}</span>
-            </div>
-            {contact.city && (
-              <div className="flex items-center space-x-2">
-                <MapPin className="w-4 h-4" />
-                <span>{contact.city}</span>
-                {contact.timezone && <span className="text-gray-400">({contact.timezone})</span>}
-              </div>
-            )}
+        </div>
+      </div>
+
+      <motion.div
+        initial={false}
+        animate={{ height: isExpanded ? "auto" : 0, opacity: isExpanded ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="overflow-hidden"
+      >
+        <div className="mt-4 space-y-2 text-sm text-gray-600">
+          <div className="flex items-center space-x-2">
+            <Phone className="w-4 h-4" />
+            <span>{contact.phone}</span>
           </div>
-          {(contact.spouse || contact.children) && (
-            <div className="mt-4 pt-4 border-t border-gray-100">
-              <div className="space-y-1">
-                {contact.spouse && (
-                  <p className="text-sm text-gray-600">
-                    <span className="font-medium">Partner:</span> {contact.spouse}
-                  </p>
-                )}
-                {contact.children && (
-                  <p className="text-sm text-gray-600">
-                    <span className="font-medium">Children:</span> {contact.children}
-                  </p>
-                )}
-              </div>
+          <div className="flex items-center space-x-2">
+            <Mail className="w-4 h-4" />
+            <span>{contact.email}</span>
+          </div>
+          <div className="flex items-center space-x-2">
+            <Calendar className="w-4 h-4" />
+            <span>{contact.birthday}</span>
+          </div>
+          {contact.city && (
+            <div className="flex items-center space-x-2">
+              <MapPin className="w-4 h-4" />
+              <span>{contact.city}</span>
+              {contact.timezone && <span className="text-gray-400">({contact.timezone})</span>}
             </div>
           )}
         </div>
-      </div>
-      <div className="mt-4 pt-4 border-t border-gray-100">
-        <p className="text-sm text-gray-500">
-          Last interaction: {contact.lastInteraction}
-        </p>
-      </div>
+
+        {(contact.spouse || contact.children) && (
+          <div className="mt-4 pt-4 border-t border-gray-100">
+            <div className="space-y-1">
+              {contact.spouse && (
+                <p className="text-sm text-gray-600">
+                  <span className="font-medium">Partner:</span> {contact.spouse}
+                </p>
+              )}
+              {contact.children && (
+                <p className="text-sm text-gray-600">
+                  <span className="font-medium">Children:</span> {contact.children}
+                </p>
+              )}
+            </div>
+          </div>
+        )}
+
+        <div className="mt-4 pt-4 border-t border-gray-100">
+          <p className="text-sm text-gray-500">
+            Last interaction: {contact.lastInteraction}
+          </p>
+        </div>
+      </motion.div>
     </motion.div>
   );
 };
