@@ -125,7 +125,7 @@ export type Database = {
           friend_connection_id: string
           id?: string
           interaction_date?: string | null
-          interaction_type: string
+          interaction_type?: string
         }
         Update: {
           created_at?: string | null
@@ -236,76 +236,76 @@ export type Database = {
       }
       profiles: {
         Row: {
-          accent_color: string | null
-          activity_status: boolean | null
-          bio: string | null
-          created_at: string
-          currency: string | null
-          date_format: string | null
-          favorite_color: string | null
-          favorite_food_types: string[] | null
-          favorite_music_genres: string[] | null
-          first_name: string | null
-          hobbies: string[] | null
           id: string
-          interests: string[] | null
-          language: string | null
+          first_name: string | null
           last_name: string | null
-          milestones: Json | null
           phone_number: string | null
           profile_picture_url: string | null
+          language: string | null
           theme: string | null
-          time_format: string | null
-          updated_at: string
+          accent_color: string | null
           visibility: string | null
+          activity_status: boolean | null
+          date_format: string | null
+          time_format: string | null
+          currency: string | null
+          created_at: string
+          updated_at: string
+          bio: string | null
+          interests: string[] | null
+          hobbies: string[] | null
+          milestones: Json | null
+          favorite_food_types: string[] | null
+          favorite_music_genres: string[] | null
+          favorite_colors: string[] | null
         }
         Insert: {
-          accent_color?: string | null
-          activity_status?: boolean | null
-          bio?: string | null
-          created_at?: string
-          currency?: string | null
-          date_format?: string | null
-          favorite_color?: string | null
-          favorite_food_types?: string[] | null
-          favorite_music_genres?: string[] | null
-          first_name?: string | null
-          hobbies?: string[] | null
           id: string
-          interests?: string[] | null
-          language?: string | null
+          first_name?: string | null
           last_name?: string | null
-          milestones?: Json | null
           phone_number?: string | null
           profile_picture_url?: string | null
+          language?: string | null
           theme?: string | null
-          time_format?: string | null
-          updated_at?: string
+          accent_color?: string | null
           visibility?: string | null
+          activity_status?: boolean | null
+          date_format?: string | null
+          time_format?: string | null
+          currency?: string | null
+          created_at?: string
+          updated_at?: string
+          bio?: string | null
+          interests?: string[] | null
+          hobbies?: string[] | null
+          milestones?: Json | null
+          favorite_food_types?: string[] | null
+          favorite_music_genres?: string[] | null
+          favorite_colors?: string[] | null
         }
         Update: {
-          accent_color?: string | null
-          activity_status?: boolean | null
-          bio?: string | null
-          created_at?: string
-          currency?: string | null
-          date_format?: string | null
-          favorite_color?: string | null
-          favorite_food_types?: string[] | null
-          favorite_music_genres?: string[] | null
+          id: string
           first_name?: string | null
-          hobbies?: string[] | null
-          id?: string
-          interests?: string[] | null
-          language?: string | null
           last_name?: string | null
-          milestones?: Json | null
           phone_number?: string | null
           profile_picture_url?: string | null
+          language?: string | null
           theme?: string | null
-          time_format?: string | null
-          updated_at?: string
+          accent_color?: string | null
           visibility?: string | null
+          activity_status?: boolean | null
+          date_format?: string | null
+          time_format?: string | null
+          currency?: string | null
+          created_at?: string
+          updated_at?: string
+          bio?: string | null
+          interests?: string[] | null
+          hobbies?: string[] | null
+          milestones?: Json | null
+          favorite_food_types?: string[] | null
+          favorite_music_genres?: string[] | null
+          favorite_colors?: string[] | null
         }
         Relationships: []
       }
@@ -334,7 +334,7 @@ export type Tables<
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
     ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
         Database[PublicTableNameOrOptions["schema"]]["Views"])
-    : never = never,
+    : never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
