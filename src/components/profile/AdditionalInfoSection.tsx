@@ -13,6 +13,7 @@ export const AdditionalInfoSection = () => {
   const [newHobby, setNewHobby] = useState("");
   const [newFoodType, setNewFoodType] = useState("");
   const [newMusicGenre, setNewMusicGenre] = useState("");
+  const [newColor, setNewColor] = useState("");
 
   const { data: session } = useQuery({
     queryKey: ["session"],
@@ -104,6 +105,19 @@ export const AdditionalInfoSection = () => {
     await handleUpdate("favorite_music_genres", updatedMusicGenres);
   };
 
+  const addFavoriteColor = async () => {
+    if (!newColor.trim()) return;
+    const updatedColors = [...(profile?.favorite_colors || []), newColor.trim()];
+    await handleUpdate("favorite_colors", updatedColors);
+    setNewColor("");
+  };
+
+  const removeFavoriteColor = async (color: string) => {
+    if (!profile?.favorite_colors) return;
+    const updatedColors = profile.favorite_colors.filter(c => c !== color);
+    await handleUpdate("favorite_colors", updatedColors);
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -114,145 +128,170 @@ export const AdditionalInfoSection = () => {
       description="Other relevant details"
       icon={FileText}
     >
-      <div className="space-y-6">
-        <div>
-          <Label htmlFor="interests" className="block mb-1.5 text-left">Interests</Label>
-          <div className="flex flex-wrap gap-2 mb-2">
+      <div className="space-y-8">
+        {/* Interests Section */}
+        <div className="space-y-3">
+          <Label htmlFor="interests" className="text-left block">Interests</Label>
+          <div className="flex flex-wrap gap-2 min-h-[2.5rem]">
             {profile?.interests?.map((interest: string) => (
               <Badge 
                 key={interest}
                 variant="secondary"
-                className="cursor-pointer hover:bg-destructive/20"
+                className="cursor-pointer hover:bg-destructive/20 px-3 py-1.5"
                 onClick={() => removeInterest(interest)}
               >
                 {interest} ×
               </Badge>
             ))}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <Input
               id="interests"
               value={newInterest}
               onChange={(e) => setNewInterest(e.target.value)}
               placeholder="Enter an interest"
-              className="bg-white"
+              className="bg-white flex-1"
             />
             <Button 
               onClick={addInterest}
               variant="secondary"
-              className="whitespace-nowrap"
+              className="w-[120px]"
             >
               Add Interest
             </Button>
           </div>
         </div>
 
-        <div>
-          <Label htmlFor="hobbies" className="block mb-1.5 text-left">Hobbies</Label>
-          <div className="flex flex-wrap gap-2 mb-2">
+        {/* Hobbies Section */}
+        <div className="space-y-3">
+          <Label htmlFor="hobbies" className="text-left block">Hobbies</Label>
+          <div className="flex flex-wrap gap-2 min-h-[2.5rem]">
             {profile?.hobbies?.map((hobby: string) => (
               <Badge 
                 key={hobby}
                 variant="secondary"
-                className="cursor-pointer hover:bg-destructive/20"
+                className="cursor-pointer hover:bg-destructive/20 px-3 py-1.5"
                 onClick={() => removeHobby(hobby)}
               >
                 {hobby} ×
               </Badge>
             ))}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <Input
               id="hobbies"
               value={newHobby}
               onChange={(e) => setNewHobby(e.target.value)}
               placeholder="Enter a hobby"
-              className="bg-white"
+              className="bg-white flex-1"
             />
             <Button 
               onClick={addHobby}
               variant="secondary"
-              className="whitespace-nowrap"
+              className="w-[120px]"
             >
               Add Hobby
             </Button>
           </div>
         </div>
 
-        <div>
-          <Label htmlFor="foodTypes" className="block mb-1.5 text-left">Favorite Food Types</Label>
-          <div className="flex flex-wrap gap-2 mb-2">
+        {/* Food Types Section */}
+        <div className="space-y-3">
+          <Label htmlFor="foodTypes" className="text-left block">Favorite Food Types</Label>
+          <div className="flex flex-wrap gap-2 min-h-[2.5rem]">
             {profile?.favorite_food_types?.map((foodType: string) => (
               <Badge 
                 key={foodType}
                 variant="secondary"
-                className="cursor-pointer hover:bg-destructive/20"
+                className="cursor-pointer hover:bg-destructive/20 px-3 py-1.5"
                 onClick={() => removeFoodType(foodType)}
               >
                 {foodType} ×
               </Badge>
             ))}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <Input
               id="foodTypes"
               value={newFoodType}
               onChange={(e) => setNewFoodType(e.target.value)}
               placeholder="Enter a food type"
-              className="bg-white"
+              className="bg-white flex-1"
             />
             <Button 
               onClick={addFoodType}
               variant="secondary"
-              className="whitespace-nowrap"
+              className="w-[120px]"
             >
               Add Food Type
             </Button>
           </div>
         </div>
 
-        <div>
-          <Label htmlFor="musicGenres" className="block mb-1.5 text-left">Favorite Music Genres</Label>
-          <div className="flex flex-wrap gap-2 mb-2">
+        {/* Music Genres Section */}
+        <div className="space-y-3">
+          <Label htmlFor="musicGenres" className="text-left block">Favorite Music Genres</Label>
+          <div className="flex flex-wrap gap-2 min-h-[2.5rem]">
             {profile?.favorite_music_genres?.map((genre: string) => (
               <Badge 
                 key={genre}
                 variant="secondary"
-                className="cursor-pointer hover:bg-destructive/20"
+                className="cursor-pointer hover:bg-destructive/20 px-3 py-1.5"
                 onClick={() => removeMusicGenre(genre)}
               >
                 {genre} ×
               </Badge>
             ))}
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <Input
               id="musicGenres"
               value={newMusicGenre}
               onChange={(e) => setNewMusicGenre(e.target.value)}
               placeholder="Enter a music genre"
-              className="bg-white"
+              className="bg-white flex-1"
             />
             <Button 
               onClick={addMusicGenre}
               variant="secondary"
-              className="whitespace-nowrap"
+              className="w-[120px]"
             >
-              Add Music Genre
+              Add Genre
             </Button>
           </div>
         </div>
 
-        <div>
-          <Label htmlFor="favoriteColor" className="block mb-1.5 text-left">Favorite Color</Label>
-          <Input 
-            id="favoriteColor" 
-            type="text"
-            placeholder="Your favorite color" 
-            className="bg-white"
-            defaultValue={profile?.favorite_color || ""}
-            onChange={(e) => handleUpdate("favorite_color", e.target.value)}
-          />
+        {/* Favorite Colors Section */}
+        <div className="space-y-3">
+          <Label htmlFor="favoriteColor" className="text-left block">Favorite Colors</Label>
+          <div className="flex flex-wrap gap-2 min-h-[2.5rem]">
+            {profile?.favorite_colors?.map((color: string) => (
+              <Badge 
+                key={color}
+                variant="secondary"
+                className="cursor-pointer hover:bg-destructive/20 px-3 py-1.5"
+                onClick={() => removeFavoriteColor(color)}
+              >
+                {color} ×
+              </Badge>
+            ))}
+          </div>
+          <div className="flex gap-3">
+            <Input 
+              id="favoriteColor"
+              value={newColor}
+              onChange={(e) => setNewColor(e.target.value)}
+              placeholder="Enter a color"
+              className="bg-white flex-1"
+            />
+            <Button 
+              onClick={addFavoriteColor}
+              variant="secondary"
+              className="w-[120px]"
+            >
+              Add Color
+            </Button>
+          </div>
         </div>
       </div>
     </ProfileSection>
