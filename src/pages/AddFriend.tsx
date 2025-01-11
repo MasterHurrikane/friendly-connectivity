@@ -1,42 +1,45 @@
-import { UserPlus } from "lucide-react";
-import Navigation from "@/components/Navigation";
-import { PageHeader } from "@/components/layout/PageHeader";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserPlus } from "lucide-react";
+import { useForm } from "react-hook-form";
+import { PageHeader } from "@/components/layout/PageHeader";
+import Navigation from "@/components/Navigation";
+import { Button } from "@/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
+
+interface AddFriendForm {
+  name: string;
+  email: string;
+  phone: string;
+  category: string;
+  notes: string;
+}
 
 const AddFriend = () => {
-  const { toast } = useToast();
   const navigate = useNavigate();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+  
+  const form = useForm<AddFriendForm>({
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      category: "friend",
+      notes: "",
+    },
+  });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      // TODO: Implement friend creation logic
-      toast({
-        title: "Friend added",
-        description: "Your new friend has been successfully added to your network.",
-        duration: 3000,
-      });
-      navigate("/friends");
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "There was an error adding your friend. Please try again.",
-        variant: "destructive",
-        duration: 3000,
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+  const onSubmit = (data: AddFriendForm) => {
+    console.log("Friend data:", data);
+    toast({
+      title: "Friend Added",
+      description: "Your friend has been successfully added.",
+    });
+    navigate("/friends");
   };
 
   return (
@@ -44,121 +47,118 @@ const AddFriend = () => {
       <Navigation />
       <main className="p-6 md:ml-64">
         <PageHeader
-          title="Add Friend"
-          description="Add a new friend to your network"
+          title="Add Friend Details"
+          description="Add information about your new friend"
           icon={UserPlus}
         />
         
         <div className="max-w-2xl mx-auto mt-6">
-          <form onSubmit={handleSubmit} className="space-y-6 bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-sm text-sm">
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Core Details</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <Label htmlFor="name" className="block">Full Name</Label>
-                  <Input id="name" placeholder="Enter full name" required />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="nickname" className="block">Nickname</Label>
-                  <Input id="nickname" placeholder="Enter nickname" />
-                </div>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <Label htmlFor="birthday" className="block">Birthday</Label>
-                  <Input id="birthday" type="date" />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="anniversary" className="block">Anniversary</Label>
-                  <Input id="anniversary" type="date" />
-                </div>
-              </div>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem className="text-left">
+                    <FormLabel className="text-left">Name</FormLabel>
+                    <FormControl>
+                      <Input placeholder="Enter friend's name" {...field} className="bg-white" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <Label htmlFor="spouse" className="block">Spouse/Partner's Name</Label>
-                  <Input id="spouse" placeholder="Enter spouse's name" />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="children" className="block">Children</Label>
-                  <Input id="children" placeholder="Names and ages" />
-                </div>
-              </div>
-            </div>
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem className="text-left">
+                      <FormLabel className="text-left">Email</FormLabel>
+                      <FormControl>
+                        <Input type="email" placeholder="Enter email" {...field} className="bg-white" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Relationship Details</h3>
-              <div className="space-y-1.5">
-                <Label className="block">Relationship Type</Label>
-                <RadioGroup defaultValue="friend" className="flex flex-wrap gap-4">
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="friend" id="friend" />
-                    <Label htmlFor="friend">Friend</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="family" id="family" />
-                    <Label htmlFor="family">Family</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="acquaintance" id="acquaintance" />
-                    <Label htmlFor="acquaintance">Acquaintance</Label>
-                  </div>
-                </RadioGroup>
-              </div>
-
-              <div className="space-y-1.5">
-                <Label htmlFor="metDate" className="block">When did you meet?</Label>
-                <Input id="metDate" type="date" />
-              </div>
-
-              <div className="space-y-1.5">
-                <Label htmlFor="group" className="block">Group</Label>
-                <Input id="group" placeholder="e.g., Book Club, Work Friends" />
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Contact Information</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <Label htmlFor="email" className="block">Email</Label>
-                  <Input id="email" type="email" placeholder="Enter email address" />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="phone" className="block">Phone Number</Label>
-                  <Input id="phone" placeholder="Enter phone number" />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <Label htmlFor="city" className="block">City/Location</Label>
-                  <Input id="city" placeholder="Enter city" />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="timezone" className="block">Time Zone</Label>
-                  <Input id="timezone" placeholder="e.g., EST, PST" />
-                </div>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Notes</h3>
-              <div className="space-y-1.5">
-                <Label htmlFor="notes" className="block">Additional Notes</Label>
-                <Textarea 
-                  id="notes" 
-                  placeholder="Add any additional notes about your friend..."
-                  className="min-h-[100px]"
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem className="text-left">
+                      <FormLabel className="text-left">Phone Number</FormLabel>
+                      <FormControl>
+                        <Input type="tel" placeholder="Enter phone number" {...field} className="bg-white" />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
               </div>
-            </div>
-            
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? "Adding Friend..." : "Add Friend"}
-            </Button>
-          </form>
+
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem className="text-left">
+                    <FormLabel className="text-left">Category</FormLabel>
+                    <Select
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                    >
+                      <FormControl>
+                        <SelectTrigger className="bg-white">
+                          <SelectValue placeholder="Select category" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent className="bg-white">
+                        <SelectItem value="friend">Friend</SelectItem>
+                        <SelectItem value="family">Family</SelectItem>
+                        <SelectItem value="colleague">Colleague</SelectItem>
+                        <SelectItem value="acquaintance">Acquaintance</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="notes"
+                render={({ field }) => (
+                  <FormItem className="text-left">
+                    <FormLabel className="text-left">Notes</FormLabel>
+                    <FormControl>
+                      <Textarea 
+                        placeholder="Add any additional notes about your friend"
+                        className="bg-white"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <div className="flex justify-end gap-4">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => navigate(-1)}
+                  className="bg-white"
+                >
+                  Cancel
+                </Button>
+                <Button type="submit">
+                  Add Friend
+                </Button>
+              </div>
+            </form>
+          </Form>
         </div>
       </main>
     </div>
