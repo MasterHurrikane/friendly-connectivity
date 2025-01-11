@@ -58,15 +58,15 @@ export const NotificationItem = ({
     >
       <Card className={`p-4 ${read ? 'bg-card/50' : 'bg-card shadow-lg'}`}>
         <div className="flex items-start gap-4">
-          <div className={`p-2 rounded-full ${priority ? 'bg-warning/20' : 'bg-primary/20'}`}>
-            <Icon className={`w-5 h-5 ${priority ? 'text-warning' : 'text-primary'}`} />
+          <div className={`p-2 rounded-full ${priority ? 'bg-destructive/20' : 'bg-primary/20'}`}>
+            <Icon className={`w-5 h-5 ${priority ? 'text-destructive' : 'text-primary'}`} />
           </div>
           <div className="flex-1">
             <div className="flex items-center justify-between mb-1">
               <h4 className="font-semibold text-sm">{title}</h4>
               <div className="flex items-center gap-2">
                 {priority && (
-                  <Badge variant="warning" className="text-xs">
+                  <Badge variant="destructive" className="text-xs">
                     Priority
                   </Badge>
                 )}
