@@ -14,7 +14,7 @@ const Navigation = () => {
     { path: "/activity", icon: Activity, label: "Activity" },
     { path: "/notifications", icon: Bell, label: "Notifications" },
     { path: "/events/create", icon: Calendar, label: "Create Event" },
-    { path: "/add", icon: UserPlus, label: "Add Friend" },
+    { path: "/add-contact", icon: UserPlus, label: "Add Friend" }, // Updated this path
   ];
 
   return (
