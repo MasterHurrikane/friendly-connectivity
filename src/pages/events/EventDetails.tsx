@@ -1,8 +1,9 @@
-import { Calendar, MapPin, Users } from "lucide-react";
+import { Calendar, MapPin, Users, Check, X, HelpCircle } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { useParams, Link } from "react-router-dom";
 
 const EventDetails = () => {
@@ -15,7 +16,11 @@ const EventDetails = () => {
     time: "4:00 PM",
     location: "Central Park",
     description: "Join us for a fun summer BBQ with friends and family!",
-    attendees: 12,
+    rsvpStats: {
+      attending: 8,
+      notAttending: 3,
+      maybe: 4
+    }
   };
 
   return (
@@ -44,11 +49,39 @@ const EventDetails = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-muted-foreground" />
-                <span>{eventDetails.attendees} attending</span>
+                <span>{eventDetails.rsvpStats.attending + eventDetails.rsvpStats.notAttending + eventDetails.rsvpStats.maybe} responses</span>
               </div>
               <p className="mt-4 text-muted-foreground">
                 {eventDetails.description}
               </p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>RSVP Status</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="flex items-center gap-2">
+                  <Badge variant="default" className="bg-green-500">
+                    <Check className="w-4 h-4 mr-1" />
+                    {eventDetails.rsvpStats.attending} Attending
+                  </Badge>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant="destructive">
+                    <X className="w-4 h-4 mr-1" />
+                    {eventDetails.rsvpStats.notAttending} Not Attending
+                  </Badge>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Badge variant="secondary">
+                    <HelpCircle className="w-4 h-4 mr-1" />
+                    {eventDetails.rsvpStats.maybe} Maybe
+                  </Badge>
+                </div>
+              </div>
             </CardContent>
           </Card>
 
