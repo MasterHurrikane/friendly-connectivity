@@ -25,7 +25,7 @@ export const EventVisibility = ({ form }: EventVisibilityProps) => {
                 <SelectValue placeholder="Select visibility" />
               </SelectTrigger>
             </FormControl>
-            <SelectContent>
+            <SelectContent className="bg-white">
               <SelectItem value="public">
                 <div className="flex items-center gap-2">
                   <Globe2 className="w-4 h-4" />
