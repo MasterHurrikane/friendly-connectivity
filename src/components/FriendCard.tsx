@@ -4,25 +4,10 @@ import { FriendAvatar } from "./friend/FriendAvatar";
 import { FriendHeader } from "./friend/FriendHeader";
 import { Button } from "./ui/button";
 import { Calendar, Mail, Phone } from "lucide-react";
+import { Friend } from "@/data/dummyFriends";
 
 interface FriendCardProps {
-  friend: {
-    id: string;
-    name: string;
-    nickname?: string;
-    category: string;
-    lastInteraction: string;
-    email: string;
-    phone: string;
-    birthday: string;
-    anniversary?: string;
-    spouse?: string;
-    children?: string;
-    metDate?: string;
-    city?: string;
-    timezone?: string;
-    avatar: string;
-  };
+  friend: Friend;
 }
 
 const FriendCard = ({ friend }: FriendCardProps) => {
@@ -56,10 +41,12 @@ const FriendCard = ({ friend }: FriendCardProps) => {
           />
           
           <div className="mt-4 space-y-2">
-            <div className="flex items-center text-sm text-gray-600">
-              <Calendar className="w-4 h-4 mr-2" />
-              <span>Birthday: {friend.birthday}</span>
-            </div>
+            {friend.birthday && (
+              <div className="flex items-center text-sm text-gray-600">
+                <Calendar className="w-4 h-4 mr-2" />
+                <span>Birthday: {friend.birthday}</span>
+              </div>
+            )}
             {friend.email && (
               <div className="flex items-center text-sm text-gray-600">
                 <Mail className="w-4 h-4 mr-2" />
@@ -76,7 +63,7 @@ const FriendCard = ({ friend }: FriendCardProps) => {
 
           <div className="mt-4 flex items-center justify-between">
             <p className="text-sm text-gray-500">
-              Last interaction: {friend.lastInteraction}
+              Last interaction: {friend.lastInteraction || "No recent interaction"}
             </p>
             <Button
               variant="outline"
