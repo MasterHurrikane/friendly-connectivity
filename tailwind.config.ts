@@ -22,8 +22,9 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "transparent", // Changed from cream color to transparent
+        background: "transparent",
         foreground: "#0D0D0D",
+        periwinkle: "#C4B3F5", // Added Periwinkle color
         primary: {
           DEFAULT: "#68C3D4",
           foreground: "#ffffff",
