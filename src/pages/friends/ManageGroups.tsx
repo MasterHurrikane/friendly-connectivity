@@ -22,8 +22,19 @@ const ManageGroups = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedFriends, setSelectedFriends] = useState<string[]>([]);
 
+  // Get current user
+  const { data: user } = useQuery({
+    queryKey: ["current-user"],
+    queryFn: async () => {
+      const { data: { user }, error } = await supabase.auth.getUser();
+      if (error) throw error;
+      return user;
+    },
+  });
+
   const { data: groups } = useQuery({
     queryKey: ["friend-groups"],
+    enabled: !!user?.id,
     queryFn: async () => {
       const { data, error } = await supabase
         .from("friend_groups")
@@ -33,7 +44,8 @@ const ManageGroups = () => {
           friend_group_members (
             count
           )
-        `);
+        `)
+        .eq('user_id', user?.id);
 
       if (error) throw error;
       return data.map(group => ({
@@ -45,6 +57,7 @@ const ManageGroups = () => {
 
   const { data: friends } = useQuery({
     queryKey: ["friends"],
+    enabled: !!user?.id,
     queryFn: async () => {
       const { data, error } = await supabase
         .from("profiles")
@@ -57,12 +70,15 @@ const ManageGroups = () => {
 
   const createGroupMutation = useMutation({
     mutationFn: async () => {
-      if (!newGroup.trim()) throw new Error("Group name is required");
+      if (!newGroup.trim() || !user?.id) throw new Error("Group name is required and user must be logged in");
 
       // Create the group
       const { data: group, error: groupError } = await supabase
         .from("friend_groups")
-        .insert({ name: newGroup.trim() })
+        .insert({ 
+          name: newGroup.trim(),
+          user_id: user.id  // Add the user_id here
+        })
         .select()
         .single();
 
@@ -196,8 +212,8 @@ const ManageGroups = () => {
                   </div>
                 </div>
                 <Button
-                  onClick={handleAddGroup}
-                  disabled={!newGroup.trim()}
+                  onClick={() => createGroupMutation.mutate()}
+                  disabled={!newGroup.trim() || !user?.id}
                   className="w-full"
                 >
                   <Check className="w-4 h-4 mr-2" />
