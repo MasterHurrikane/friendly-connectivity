@@ -16,8 +16,8 @@ export const EventHeaderImage = ({
   onRemoveImage,
 }: EventHeaderImageProps) => {
   return (
-    <FormItem>
-      <FormLabel>Event Header Image</FormLabel>
+    <FormItem className="text-left">
+      <FormLabel className="text-left">Event Header Image</FormLabel>
       <FormControl>
         <div className="space-y-4">
           <Input

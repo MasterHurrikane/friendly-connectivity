@@ -37,8 +37,8 @@ export const EventLocation = ({ form, isVirtual, setIsVirtual }: EventLocationPr
         control={form.control}
         name="location"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel>
+          <FormItem className="text-left">
+            <FormLabel className="text-left">
               {isVirtual ? "Meeting Link" : "Location"}
             </FormLabel>
             <FormControl>

@@ -15,8 +15,8 @@ export const EventBasicInfo = ({ form }: EventBasicInfoProps) => {
         control={form.control}
         name="title"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel>Event Name</FormLabel>
+          <FormItem className="text-left">
+            <FormLabel className="text-left">Event Name</FormLabel>
             <FormControl>
               <Input placeholder="Enter event name" {...field} />
             </FormControl>
@@ -29,8 +29,8 @@ export const EventBasicInfo = ({ form }: EventBasicInfoProps) => {
         control={form.control}
         name="description"
         render={({ field }) => (
-          <FormItem>
-            <FormLabel>Description</FormLabel>
+          <FormItem className="text-left">
+            <FormLabel className="text-left">Description</FormLabel>
             <FormControl>
               <Textarea 
                 placeholder="What's this event about?"
@@ -47,8 +47,8 @@ export const EventBasicInfo = ({ form }: EventBasicInfoProps) => {
           control={form.control}
           name="date"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Date</FormLabel>
+            <FormItem className="text-left">
+              <FormLabel className="text-left">Date</FormLabel>
               <FormControl>
                 <Input type="date" {...field} />
               </FormControl>
@@ -61,8 +61,8 @@ export const EventBasicInfo = ({ form }: EventBasicInfoProps) => {
           control={form.control}
           name="time"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>Time</FormLabel>
+            <FormItem className="text-left">
+              <FormLabel className="text-left">Time</FormLabel>
               <FormControl>
                 <Input type="time" {...field} />
               </FormControl>

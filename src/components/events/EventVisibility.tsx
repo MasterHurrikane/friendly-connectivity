@@ -14,8 +14,8 @@ export const EventVisibility = ({ form }: EventVisibilityProps) => {
       control={form.control}
       name="visibility"
       render={({ field }) => (
-        <FormItem>
-          <FormLabel>Event Visibility</FormLabel>
+        <FormItem className="text-left">
+          <FormLabel className="text-left">Event Visibility</FormLabel>
           <Select 
             onValueChange={field.onChange} 
             defaultValue={field.value}

@@ -11,8 +11,8 @@ export const EventPhotosUpload = ({
   onPhotosChange,
 }: EventPhotosUploadProps) => {
   return (
-    <FormItem>
-      <FormLabel>Additional Event Photos</FormLabel>
+    <FormItem className="text-left">
+      <FormLabel className="text-left">Additional Event Photos</FormLabel>
       <FormControl>
         <div className="space-y-4">
           <Input
