@@ -8,6 +8,10 @@ import Profile from "./pages/Profile"
 import Contacts from "./pages/Contacts"
 import AddContact from "./pages/AddContact"
 import Calendar from "./pages/Calendar"
+import AddFriend from "./pages/friends/AddFriend"
+import FriendRequests from "./pages/friends/FriendRequests"
+import ImportContacts from "./pages/friends/ImportContacts"
+import ManageGroups from "./pages/friends/ManageGroups"
 
 function App() {
   return (
@@ -22,6 +26,10 @@ function App() {
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/add" element={<AddContact />} />
         <Route path="/calendar" element={<Calendar />} />
+        <Route path="/friends/add" element={<AddFriend />} />
+        <Route path="/friends/requests" element={<FriendRequests />} />
+        <Route path="/friends/import" element={<ImportContacts />} />
+        <Route path="/friends/groups" element={<ManageGroups />} />
       </Routes>
     </Router>
   )
