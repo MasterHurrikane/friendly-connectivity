@@ -35,6 +35,12 @@ const Navigation = () => {
       label: "My Profile",
       section: "main"
     },
+    {
+      path: "/calendar",
+      icon: Calendar,
+      label: "Calendar",
+      section: "main"
+    },
 
     // Friends & Social
     {

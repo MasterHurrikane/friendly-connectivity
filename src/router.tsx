@@ -10,6 +10,7 @@ import Messages from "./pages/Messages";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import Analytics from "./pages/Analytics";
+import Calendar from "./pages/Calendar";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
   {
     path: "/analytics",
     element: <Analytics />,
+  },
+  {
+    path: "/calendar",
+    element: <Calendar />,
   },
   ...authRoutes,
   ...eventRoutes,
