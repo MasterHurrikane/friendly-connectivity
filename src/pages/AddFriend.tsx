@@ -1,27 +1,46 @@
-import { UserPlus } from "lucide-react"
-import Navigation from "@/components/Navigation"
-import { PageHeader } from "@/components/layout/PageHeader"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { useToast } from "@/components/ui/use-toast"
+import { UserPlus } from "lucide-react";
+import Navigation from "@/components/Navigation";
+import { PageHeader } from "@/components/layout/PageHeader";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const AddContact = () => {
-  const { toast } = useToast()
+const AddFriend = () => {
+  const { toast } = useToast();
+  const navigate = useNavigate();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    toast({
-      title: "Friend added",
-      description: "Your new friend has been successfully added to your network.",
-      duration: 3000,
-    })
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      // TODO: Implement friend creation logic
+      toast({
+        title: "Friend added",
+        description: "Your new friend has been successfully added to your network.",
+        duration: 3000,
+      });
+      navigate("/friends");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was an error adding your friend. Please try again.",
+        variant: "destructive",
+        duration: 3000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       <Navigation />
       <main className="p-6 md:ml-64">
         <PageHeader
@@ -31,39 +50,39 @@ const AddContact = () => {
         />
         
         <div className="max-w-2xl mx-auto mt-6">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6 bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-sm">
             <div className="space-y-4">
               <h3 className="text-lg font-semibold">Core Details</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Full Name</Label>
-                  <Input id="name" placeholder="Enter full name" className="bg-white" />
+                  <Input id="name" placeholder="Enter full name" required />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="nickname">Nickname</Label>
-                  <Input id="nickname" placeholder="Enter nickname" className="bg-white" />
+                  <Input id="nickname" placeholder="Enter nickname" />
                 </div>
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="birthday">Birthday</Label>
-                  <Input id="birthday" type="date" className="bg-white" />
+                  <Input id="birthday" type="date" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="anniversary">Anniversary</Label>
-                  <Input id="anniversary" type="date" className="bg-white" />
+                  <Input id="anniversary" type="date" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="spouse">Spouse/Partner's Name</Label>
-                  <Input id="spouse" placeholder="Enter spouse's name" className="bg-white" />
+                  <Input id="spouse" placeholder="Enter spouse's name" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="children">Children</Label>
-                  <Input id="children" placeholder="Names and ages" className="bg-white" />
+                  <Input id="children" placeholder="Names and ages" />
                 </div>
               </div>
             </div>
@@ -72,7 +91,7 @@ const AddContact = () => {
               <h3 className="text-lg font-semibold">Relationship Details</h3>
               <div className="space-y-2">
                 <Label>Relationship Type</Label>
-                <RadioGroup defaultValue="friend" className="flex space-x-4">
+                <RadioGroup defaultValue="friend" className="flex flex-wrap gap-4">
                   <div className="flex items-center space-x-2">
                     <RadioGroupItem value="friend" id="friend" />
                     <Label htmlFor="friend">Friend</Label>
@@ -90,12 +109,12 @@ const AddContact = () => {
 
               <div className="space-y-2">
                 <Label htmlFor="metDate">When did you meet?</Label>
-                <Input id="metDate" type="date" className="bg-white" />
+                <Input id="metDate" type="date" />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="group">Group</Label>
-                <Input id="group" placeholder="e.g., Book Club, Work Friends" className="bg-white" />
+                <Input id="group" placeholder="e.g., Book Club, Work Friends" />
               </div>
             </div>
 
@@ -104,22 +123,22 @@ const AddContact = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="Enter email address" className="bg-white" />
+                  <Input id="email" type="email" placeholder="Enter email address" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" placeholder="Enter phone number" className="bg-white" />
+                  <Input id="phone" placeholder="Enter phone number" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="city">City/Location</Label>
-                  <Input id="city" placeholder="Enter city" className="bg-white" />
+                  <Input id="city" placeholder="Enter city" />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="timezone">Time Zone</Label>
-                  <Input id="timezone" placeholder="e.g., EST, PST" className="bg-white" />
+                  <Input id="timezone" placeholder="e.g., EST, PST" />
                 </div>
               </div>
             </div>
@@ -131,13 +150,13 @@ const AddContact = () => {
                 <Textarea 
                   id="notes" 
                   placeholder="Add any additional notes about your friend..."
-                  className="bg-white"
+                  className="min-h-[100px]"
                 />
               </div>
             </div>
             
-            <Button type="submit" className="w-full">
-              Add Friend
+            <Button type="submit" className="w-full" disabled={isSubmitting}>
+              {isSubmitting ? "Adding Friend..." : "Add Friend"}
             </Button>
           </form>
         </div>
@@ -146,4 +165,4 @@ const AddContact = () => {
   );
 };
 
-export default AddContact;
+export default AddFriend;

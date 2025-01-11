@@ -8,6 +8,7 @@ import Calendar from "@/pages/Calendar";
 import Dashboard from "@/pages/Dashboard";
 import Index from "@/pages/Index";
 import Profile from "@/pages/Profile";
+import AddFriend from "@/pages/AddFriend";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export const router = createBrowserRouter([
@@ -29,6 +30,11 @@ export const router = createBrowserRouter([
   {
     path: "profile",
     element: <Profile />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "add",
+    element: <AddFriend />,
     errorElement: <ErrorBoundary />,
   },
   ...authRoutes,
