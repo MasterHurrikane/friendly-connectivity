@@ -28,7 +28,7 @@ export const FriendHeader = ({ name, nickname, category, metDate, onFavorite }: 
       <Button
         variant="ghost"
         size="icon"
-        className="text-gray-400 hover:text-yellow-400"
+        className="text-gray-400 hover:text-yellow-400 hidden md:flex"
         onClick={onFavorite}
       >
         <Star className="h-5 w-5" />

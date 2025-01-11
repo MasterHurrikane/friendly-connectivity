@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FriendAvatar } from "./friend/FriendAvatar";
 import { FriendHeader } from "./friend/FriendHeader";
 import { Button } from "./ui/button";
-import { Calendar, Mail, Phone } from "lucide-react";
+import { Calendar, Mail, Phone, Star } from "lucide-react";
 import { Friend } from "@/data/dummyFriends";
 
 interface FriendCardProps {
@@ -31,7 +31,17 @@ const FriendCard = ({ friend }: FriendCardProps) => {
     >
       <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 md:gap-8">
         <div className="flex items-start space-x-4">
-          <FriendAvatar avatar={friend.avatar} name={friend.name} className="w-12 h-12 md:w-16 md:h-16" />
+          <div className="flex flex-col items-center gap-2">
+            <FriendAvatar avatar={friend.avatar} name={friend.name} className="w-12 h-12 md:w-16 md:h-16" />
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-gray-400 hover:text-yellow-400 md:hidden pt-2"
+              onClick={handleFavorite}
+            >
+              <Star className="h-5 w-5" />
+            </Button>
+          </div>
           <div className="flex-1">
             <FriendHeader
               name={friend.name}
