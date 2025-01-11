@@ -15,9 +15,9 @@ export const ProfileSection = ({ title, description, icon: Icon, children }: Pro
       animate={{ opacity: 1, y: 0 }}
       className="p-6 rounded-lg shadow-sm border border-primary/10 hover:shadow-md transition-all duration-300"
     >
-      <div className="flex items-center space-x-4 mb-4">
-        <Icon className="w-8 h-8 text-primary" />
-        <div>
+      <div className="flex items-start space-x-4 mb-4">
+        <Icon className="w-8 h-8 text-primary mt-1" />
+        <div className="text-left">
           <h2 className="text-xl font-semibold text-foreground">{title}</h2>
           <p className="text-sm text-gray-600">{description}</p>
         </div>
