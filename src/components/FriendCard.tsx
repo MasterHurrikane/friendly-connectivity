@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { FriendAvatar } from "./friend/FriendAvatar";
 import { FriendHeader } from "./friend/FriendHeader";
+import { Button } from "./ui/button";
+import { Calendar, Mail, Phone } from "lucide-react";
 
 interface FriendCardProps {
   friend: {
@@ -43,7 +45,7 @@ const FriendCard = ({ friend }: FriendCardProps) => {
       onClick={handleCardClick}
     >
       <div className="flex items-start space-x-4">
-        <FriendAvatar avatar={friend.avatar} name={friend.name} />
+        <FriendAvatar avatar={friend.avatar} name={friend.name} className="w-16 h-16" />
         <div className="flex-1">
           <FriendHeader
             name={friend.name}
@@ -52,9 +54,41 @@ const FriendCard = ({ friend }: FriendCardProps) => {
             metDate={friend.metDate}
             onFavorite={handleFavorite}
           />
-          <p className="text-sm text-gray-500 mt-4">
-            Last interaction: {friend.lastInteraction}
-          </p>
+          
+          <div className="mt-4 space-y-2">
+            <div className="flex items-center text-sm text-gray-600">
+              <Calendar className="w-4 h-4 mr-2" />
+              <span>Birthday: {friend.birthday}</span>
+            </div>
+            {friend.email && (
+              <div className="flex items-center text-sm text-gray-600">
+                <Mail className="w-4 h-4 mr-2" />
+                <span>{friend.email}</span>
+              </div>
+            )}
+            {friend.phone && (
+              <div className="flex items-center text-sm text-gray-600">
+                <Phone className="w-4 h-4 mr-2" />
+                <span>{friend.phone}</span>
+              </div>
+            )}
+          </div>
+
+          <div className="mt-4 flex items-center justify-between">
+            <p className="text-sm text-gray-500">
+              Last interaction: {friend.lastInteraction}
+            </p>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={(e) => {
+                e.stopPropagation();
+                navigate(`/friends/${friend.id}/activity`);
+              }}
+            >
+              View Activity
+            </Button>
+          </div>
         </div>
       </div>
     </motion.div>
