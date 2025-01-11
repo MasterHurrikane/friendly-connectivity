@@ -5,7 +5,9 @@ import Signup from "./pages/auth/Signup"
 import ForgotPassword from "./pages/auth/ForgotPassword"
 import Dashboard from "./pages/Dashboard"
 import Profile from "./pages/Profile"
-import Navigation from "./components/Navigation"
+import Contacts from "./pages/Contacts"
+import AddContact from "./pages/AddContact"
+import Calendar from "./pages/Calendar"
 
 function App() {
   return (
@@ -17,6 +19,9 @@ function App() {
         <Route path="/auth/forgot-password" element={<ForgotPassword />} />
         <Route path="/" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/contacts" element={<Contacts />} />
+        <Route path="/add" element={<AddContact />} />
+        <Route path="/calendar" element={<Calendar />} />
       </Routes>
     </Router>
   )
