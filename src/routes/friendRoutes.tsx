@@ -1,6 +1,6 @@
 import Friends from "@/pages/Friends";
 import FriendProfile from "@/pages/FriendProfile";
-import AddFriend from "@/pages/friends/AddFriend";
+import AddFriend from "@/pages/AddFriend";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export const friendRoutes = [
