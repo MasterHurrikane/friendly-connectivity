@@ -75,3 +75,48 @@ export const dummyFriends: Friend[] = [
     notes: "Met at the company retreat. Great team player and mentor."
   }
 ];
+
+export const suggestedFriends: Friend[] = [
+  {
+    id: "4",
+    name: "Sarah Chen",
+    category: "Suggested",
+    email: "sarah@example.com",
+    phone: "+1 (555) 555-0123",
+    birthday: "September 8",
+    city: "Seattle",
+    timezone: "PST",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+    notes: "Tech enthusiast and amateur photographer",
+    interests: ["Photography", "Technology", "Hiking"],
+    hobbies: ["Rock climbing", "Cooking"]
+  },
+  {
+    id: "5",
+    name: "Michael Rodriguez",
+    category: "Suggested",
+    email: "michael@example.com",
+    phone: "+1 (555) 555-0456",
+    birthday: "April 12",
+    city: "Austin",
+    timezone: "CST",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Michael",
+    notes: "Music producer and coffee enthusiast",
+    interests: ["Music", "Coffee", "Travel"],
+    hobbies: ["DJing", "Brewing coffee"]
+  },
+  {
+    id: "6",
+    name: "Emily Parker",
+    category: "Suggested",
+    email: "emily@example.com",
+    phone: "+1 (555) 555-0789",
+    birthday: "January 30",
+    city: "Portland",
+    timezone: "PST",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emily",
+    notes: "Artist and yoga instructor",
+    interests: ["Art", "Yoga", "Sustainability"],
+    hobbies: ["Painting", "Meditation"]
+  }
+];

@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { dummyFriends } from "@/data/dummyFriends";
+import { suggestedFriends } from "@/data/dummyFriends";
 
 const DiscoverFriends = () => {
   const { toast } = useToast();
@@ -61,7 +61,7 @@ const DiscoverFriends = () => {
 
           <TabsContent value="suggested">
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {dummyFriends.map((friend) => (
+              {suggestedFriends.map((friend) => (
                 <Card key={friend.id} className="p-6">
                   <div className="flex items-start space-x-4">
                     <img
@@ -114,7 +114,6 @@ const DiscoverFriends = () => {
                   Join Group
                 </Button>
               </Card>
-              {/* Add more trending groups/events */}
             </div>
           </TabsContent>
         </Tabs>
