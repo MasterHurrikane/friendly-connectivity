@@ -2,7 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { authRoutes } from "@/routes/authRoutes";
 import { activityRoutes } from "@/routes/activityRoutes";
 import { notificationRoutes } from "@/routes/notificationRoutes";
-import { contactRoutes } from "@/routes/contactRoutes";
+import { friendRoutes } from "@/routes/friendRoutes";
 import { eventRoutes } from "@/routes/eventRoutes";
 import Calendar from "@/pages/Calendar";
 import Dashboard from "@/pages/Dashboard";
@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
   ...authRoutes,
   ...activityRoutes,
   ...notificationRoutes,
-  ...contactRoutes,
+  ...friendRoutes,
   ...eventRoutes,
 ]);
 
