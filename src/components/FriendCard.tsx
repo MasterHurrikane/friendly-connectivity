@@ -29,7 +29,7 @@ const FriendCard = ({ friend }: FriendCardProps) => {
       className="bg-white/90 backdrop-blur-sm rounded-xl p-10 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 cursor-pointer"
       onClick={handleCardClick}
     >
-      <div className="flex flex-col h-full">
+      <div className="flex justify-between items-start gap-8">
         <div className="flex items-start space-x-4">
           <FriendAvatar avatar={friend.avatar} name={friend.name} className="w-16 h-16" />
           <div className="flex-1">
@@ -64,8 +64,8 @@ const FriendCard = ({ friend }: FriendCardProps) => {
           </div>
         </div>
 
-        <div className="mt-auto pt-6 flex flex-col items-center space-y-3">
-          <p className="text-sm text-gray-500">
+        <div className="flex flex-col items-center justify-center space-y-3 min-w-[200px]">
+          <p className="text-sm text-gray-500 text-center">
             Last interaction: {friend.lastInteraction || "No recent interaction"}
           </p>
           <Button
