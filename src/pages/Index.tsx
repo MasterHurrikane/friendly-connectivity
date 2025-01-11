@@ -1,22 +1,24 @@
 import { motion } from "framer-motion";
 import Navigation from "../components/Navigation";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-pink-200">
-      {/* Top Navigation */}
-      <nav className="p-6">
-        <ul className="flex justify-center space-x-8 text-gray-600">
-          <li><a href="#" className="hover:text-gray-900 transition-colors">Home</a></li>
-          <li><a href="#" className="hover:text-gray-900 transition-colors">About Us</a></li>
-          <li><a href="#" className="hover:text-gray-900 transition-colors">App</a></li>
-          <li><a href="#" className="hover:text-gray-900 transition-colors">Testimonials</a></li>
-          <li><a href="#" className="hover:text-gray-900 transition-colors">Contact Us</a></li>
-        </ul>
-      </nav>
+    <Router>
+      <div className="min-h-screen bg-gradient-to-br from-pink-50 to-pink-200">
+        {/* Top Navigation */}
+        <nav className="p-6">
+          <ul className="flex justify-center space-x-8 text-gray-600">
+            <li><a href="#" className="hover:text-gray-900 transition-colors">Home</a></li>
+            <li><a href="#" className="hover:text-gray-900 transition-colors">About Us</a></li>
+            <li><a href="#" className="hover:text-gray-900 transition-colors">App</a></li>
+            <li><a href="#" className="hover:text-gray-900 transition-colors">Testimonials</a></li>
+            <li><a href="#" className="hover:text-gray-900 transition-colors">Contact Us</a></li>
+          </ul>
+        </nav>
 
-      {/* Hero Section */}
-      <main className="container mx-auto px-6 pt-12 pb-24">
+        {/* Hero Section */}
+        <main className="container mx-auto px-6 pt-12 pb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -75,8 +77,9 @@ const Index = () => {
             </div>
           </motion.div>
         </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </Router>
   );
 };
 
