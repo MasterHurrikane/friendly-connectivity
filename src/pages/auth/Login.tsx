@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -11,9 +12,40 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { motion } from "framer-motion"
 import { ArrowLeft } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { supabase } from "@/integrations/supabase/client"
+import { AuthError } from "@supabase/supabase-js"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 
 export default function Login() {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setError(null)
+
+    try {
+      setLoading(true)
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
+
+      if (error) throw error
+
+      navigate("/dashboard")
+    } catch (err) {
+      const error = err as AuthError
+      setError(error.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white flex flex-col items-center justify-center p-4">
       <motion.div
@@ -33,30 +65,52 @@ export default function Login() {
               Sign in to your account to continue
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" placeholder="hello@friendly.com" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" />
-            </div>
-          </CardContent>
-          <CardFooter className="flex flex-col space-y-4">
-            <Button className="w-full">Sign in</Button>
-            <div className="text-sm text-center space-y-2">
-              <Link to="/auth/forgot-password" className="text-primary hover:underline block">
-                Forgot password?
-              </Link>
-              <span className="text-gray-500">
-                Don't have an account?{" "}
-                <Link to="/auth/signup" className="text-primary hover:underline">
-                  Sign up
+          <form onSubmit={handleLogin}>
+            <CardContent className="space-y-4">
+              {error && (
+                <Alert variant="destructive">
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input 
+                  id="email" 
+                  type="email" 
+                  placeholder="hello@friendly.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <Input 
+                  id="password" 
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </div>
+            </CardContent>
+            <CardFooter className="flex flex-col space-y-4">
+              <Button className="w-full" type="submit" disabled={loading}>
+                {loading ? "Signing in..." : "Sign in"}
+              </Button>
+              <div className="text-sm text-center space-y-2">
+                <Link to="/auth/forgot-password" className="text-primary hover:underline block">
+                  Forgot password?
                 </Link>
-              </span>
-            </div>
-          </CardFooter>
+                <span className="text-gray-500">
+                  Don't have an account?{" "}
+                  <Link to="/auth/signup" className="text-primary hover:underline">
+                    Sign up
+                  </Link>
+                </span>
+              </div>
+            </CardFooter>
+          </form>
         </Card>
       </motion.div>
     </div>

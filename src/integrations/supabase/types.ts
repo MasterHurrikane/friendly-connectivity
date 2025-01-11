@@ -9,7 +9,134 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      blocked_users: {
+        Row: {
+          blocked_user_id: string | null
+          created_at: string
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          blocked_user_id?: string | null
+          created_at?: string
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          blocked_user_id?: string | null
+          created_at?: string
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blocked_users_blocked_user_id_fkey"
+            columns: ["blocked_user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blocked_users_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      notification_preferences: {
+        Row: {
+          created_at: string
+          delivery_method: string | null
+          enabled: boolean | null
+          frequency: string | null
+          id: string
+          type: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          delivery_method?: string | null
+          enabled?: boolean | null
+          frequency?: string | null
+          id?: string
+          type: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          delivery_method?: string | null
+          enabled?: boolean | null
+          frequency?: string | null
+          id?: string
+          type?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notification_preferences_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          accent_color: string | null
+          activity_status: boolean | null
+          created_at: string
+          currency: string | null
+          date_format: string | null
+          first_name: string | null
+          id: string
+          language: string | null
+          last_name: string | null
+          phone_number: string | null
+          profile_picture_url: string | null
+          theme: string | null
+          time_format: string | null
+          updated_at: string
+          visibility: string | null
+        }
+        Insert: {
+          accent_color?: string | null
+          activity_status?: boolean | null
+          created_at?: string
+          currency?: string | null
+          date_format?: string | null
+          first_name?: string | null
+          id: string
+          language?: string | null
+          last_name?: string | null
+          phone_number?: string | null
+          profile_picture_url?: string | null
+          theme?: string | null
+          time_format?: string | null
+          updated_at?: string
+          visibility?: string | null
+        }
+        Update: {
+          accent_color?: string | null
+          activity_status?: boolean | null
+          created_at?: string
+          currency?: string | null
+          date_format?: string | null
+          first_name?: string | null
+          id?: string
+          language?: string | null
+          last_name?: string | null
+          phone_number?: string | null
+          profile_picture_url?: string | null
+          theme?: string | null
+          time_format?: string | null
+          updated_at?: string
+          visibility?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
