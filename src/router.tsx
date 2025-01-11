@@ -12,6 +12,7 @@ import Profile from "@/pages/Profile";
 import AddFriend from "@/pages/AddFriend";
 import SearchFriends from "@/pages/friends/SearchFriends";
 import DiscoverFriends from "@/pages/friends/DiscoverFriends";
+import FriendRequests from "@/pages/friends/FriendRequests";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export const router = createBrowserRouter([
@@ -48,6 +49,11 @@ export const router = createBrowserRouter([
   {
     path: "discover",
     element: <DiscoverFriends />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "requests",
+    element: <FriendRequests />,
     errorElement: <ErrorBoundary />,
   },
   ...authRoutes,
