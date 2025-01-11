@@ -110,6 +110,92 @@ export type Database = {
           },
         ]
       }
+      friend_interactions: {
+        Row: {
+          created_at: string | null
+          details: Json | null
+          friend_connection_id: string
+          id: string
+          interaction_date: string | null
+          interaction_type: string
+        }
+        Insert: {
+          created_at?: string | null
+          details?: Json | null
+          friend_connection_id: string
+          id?: string
+          interaction_date?: string | null
+          interaction_type: string
+        }
+        Update: {
+          created_at?: string | null
+          details?: Json | null
+          friend_connection_id?: string
+          id?: string
+          interaction_date?: string | null
+          interaction_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "friend_interactions_friend_connection_id_fkey"
+            columns: ["friend_connection_id"]
+            isOneToOne: false
+            referencedRelation: "friends"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      friends: {
+        Row: {
+          created_at: string | null
+          friend_id: string
+          friendship_date: string | null
+          id: string
+          interaction_count: number | null
+          last_interaction: string | null
+          relationship_type: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          friend_id: string
+          friendship_date?: string | null
+          id?: string
+          interaction_count?: number | null
+          last_interaction?: string | null
+          relationship_type?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          friend_id?: string
+          friendship_date?: string | null
+          id?: string
+          interaction_count?: number | null
+          last_interaction?: string | null
+          relationship_type?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "friends_friend_id_fkey"
+            columns: ["friend_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "friends_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       notification_preferences: {
         Row: {
           created_at: string
@@ -152,13 +238,18 @@ export type Database = {
         Row: {
           accent_color: string | null
           activity_status: boolean | null
+          bio: string | null
           created_at: string
           currency: string | null
           date_format: string | null
+          favorite_color: string | null
           first_name: string | null
+          hobbies: string[] | null
           id: string
+          interests: string[] | null
           language: string | null
           last_name: string | null
+          milestones: Json | null
           phone_number: string | null
           profile_picture_url: string | null
           theme: string | null
@@ -169,13 +260,18 @@ export type Database = {
         Insert: {
           accent_color?: string | null
           activity_status?: boolean | null
+          bio?: string | null
           created_at?: string
           currency?: string | null
           date_format?: string | null
+          favorite_color?: string | null
           first_name?: string | null
+          hobbies?: string[] | null
           id: string
+          interests?: string[] | null
           language?: string | null
           last_name?: string | null
+          milestones?: Json | null
           phone_number?: string | null
           profile_picture_url?: string | null
           theme?: string | null
@@ -186,13 +282,18 @@ export type Database = {
         Update: {
           accent_color?: string | null
           activity_status?: boolean | null
+          bio?: string | null
           created_at?: string
           currency?: string | null
           date_format?: string | null
+          favorite_color?: string | null
           first_name?: string | null
+          hobbies?: string[] | null
           id?: string
+          interests?: string[] | null
           language?: string | null
           last_name?: string | null
+          milestones?: Json | null
           phone_number?: string | null
           profile_picture_url?: string | null
           theme?: string | null
