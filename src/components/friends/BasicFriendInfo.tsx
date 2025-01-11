@@ -71,7 +71,7 @@ export const BasicFriendInfo = ({ form }: BasicFriendInfoProps) => {
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className="bg-white">
                   <SelectItem value="friend">Friend</SelectItem>
                   <SelectItem value="family">Family</SelectItem>
                   <SelectItem value="colleague">Colleague</SelectItem>
