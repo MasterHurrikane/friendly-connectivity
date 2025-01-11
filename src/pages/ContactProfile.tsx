@@ -1,65 +1,12 @@
 import { useParams } from "react-router-dom";
-import { Phone, Mail, Calendar, MapPin, Users, Heart, Clock, Tag } from "lucide-react";
+import { Heart } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-
-// This would typically come from an API or database
-const dummyContacts = [
-  {
-    id: "1",
-    name: "John Doe",
-    nickname: "Johnny",
-    category: "Friend",
-    lastInteraction: "2 days ago",
-    email: "john@example.com",
-    phone: "+1 (555) 123-4567",
-    birthday: "March 15",
-    anniversary: "June 21",
-    spouse: "Jane Doe",
-    children: "Tommy (8), Sarah (6)",
-    metDate: "2022-01-01",
-    city: "San Francisco",
-    timezone: "PST",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
-    notes: "Met at the local tech meetup. Loves hiking and photography."
-  },
-  {
-    id: "2",
-    name: "Jane Smith",
-    nickname: "Janey",
-    category: "Family",
-    lastInteraction: "1 week ago",
-    email: "jane@example.com",
-    phone: "+1 (555) 987-6543",
-    birthday: "July 22",
-    anniversary: "August 15",
-    spouse: "Mike Smith",
-    children: "Emma (4)",
-    metDate: "2021-06-15",
-    city: "New York",
-    timezone: "EST",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jane",
-    notes: "My cousin from New York. Amazing baker and always brings cookies."
-  },
-  {
-    id: "3",
-    name: "Bob Wilson",
-    nickname: "Bobby",
-    category: "Work",
-    lastInteraction: "Yesterday",
-    email: "bob@example.com",
-    phone: "+1 (555) 246-8135",
-    birthday: "December 5",
-    metDate: "2023-01-10",
-    city: "Chicago",
-    timezone: "CST",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Bob",
-    notes: "Met at the company retreat. Great team player and mentor."
-  }
-];
+import { ContactBasicInfo } from "@/components/contact/ContactBasicInfo";
+import { ContactDetails } from "@/components/contact/ContactDetails";
+import { dummyContacts } from "@/data/dummyContacts";
 
 const ContactProfile = () => {
   const { id } = useParams();
@@ -103,112 +50,12 @@ const ContactProfile = () => {
         <div className="max-w-4xl mx-auto space-y-6 mt-6">
           <Card>
             <CardContent className="p-6">
-              <div className="flex items-start space-x-6">
-                <img
-                  src={contact.avatar}
-                  alt={contact.name}
-                  className="w-24 h-24 rounded-full object-cover"
-                />
-                <div className="space-y-4 flex-1">
-                  <div>
-                    <h2 className="text-2xl font-semibold">{contact.name}</h2>
-                    {contact.nickname && (
-                      <p className="text-gray-500">"{contact.nickname}"</p>
-                    )}
-                    <div className="flex items-center space-x-2 mt-2">
-                      <Badge variant="secondary">{contact.category}</Badge>
-                      {contact.metDate && (
-                        <Badge variant="outline">
-                          Friends for {calculateFriendshipDuration(contact.metDate)}
-                        </Badge>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
+              <ContactBasicInfo 
+                contact={contact} 
+                friendshipDuration={calculateFriendshipDuration(contact.metDate)} 
+              />
               <Separator className="my-6" />
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-4">
-                  <h3 className="font-semibold text-lg flex items-center gap-2">
-                    <Users className="w-5 h-5" />
-                    Contact Information
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-2">
-                      <Phone className="w-4 h-4 text-gray-500" />
-                      <span>{contact.phone}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Mail className="w-4 h-4 text-gray-500" />
-                      <span>{contact.email}</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <MapPin className="w-4 h-4 text-gray-500" />
-                      <span>{contact.city} {contact.timezone && `(${contact.timezone})`}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-4">
-                  <h3 className="font-semibold text-lg flex items-center gap-2">
-                    <Calendar className="w-5 h-5" />
-                    Important Dates
-                  </h3>
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-2">
-                      <Calendar className="w-4 h-4 text-gray-500" />
-                      <span>Birthday: {contact.birthday}</span>
-                    </div>
-                    {contact.anniversary && (
-                      <div className="flex items-center space-x-2">
-                        <Calendar className="w-4 h-4 text-gray-500" />
-                        <span>Anniversary: {contact.anniversary}</span>
-                      </div>
-                    )}
-                    {contact.metDate && (
-                      <div className="flex items-center space-x-2">
-                        <Clock className="w-4 h-4 text-gray-500" />
-                        <span>Met on: {new Date(contact.metDate).toLocaleDateString()}</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {(contact.spouse || contact.children) && (
-                  <div className="space-y-4">
-                    <h3 className="font-semibold text-lg flex items-center gap-2">
-                      <Users className="w-5 h-5" />
-                      Family
-                    </h3>
-                    <div className="space-y-3">
-                      {contact.spouse && (
-                        <div className="flex items-center space-x-2">
-                          <Users className="w-4 h-4 text-gray-500" />
-                          <span>Partner: {contact.spouse}</span>
-                        </div>
-                      )}
-                      {contact.children && (
-                        <div className="flex items-center space-x-2">
-                          <Users className="w-4 h-4 text-gray-500" />
-                          <span>Children: {contact.children}</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {contact.notes && (
-                  <div className="space-y-4">
-                    <h3 className="font-semibold text-lg flex items-center gap-2">
-                      <Tag className="w-5 h-5" />
-                      Notes
-                    </h3>
-                    <p className="text-gray-600">{contact.notes}</p>
-                  </div>
-                )}
-              </div>
+              <ContactDetails contact={contact} />
             </CardContent>
           </Card>
         </div>
