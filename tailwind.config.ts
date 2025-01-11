@@ -22,31 +22,43 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
+        background: "#F2E8C9", // Cream Beige
+        foreground: "#0D0D0D", // Deep Black
         primary: {
-          DEFAULT: "#4ADE80",
+          DEFAULT: "#68C3D4", // Bold Turquoise
           foreground: "#ffffff",
         },
         secondary: {
-          DEFAULT: "#FB923C",
+          DEFAULT: "#D481E6", // Vibrant Orchid
           foreground: "#ffffff",
         },
         destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
+          DEFAULT: "#E57373", // Coral Red
+          foreground: "#ffffff",
+        },
+        success: {
+          DEFAULT: "#A09C76", // Olive Green
+          foreground: "#0D0D0D",
+        },
+        warning: {
+          DEFAULT: "#F5A485", // Sunset Orange
+          foreground: "#0D0D0D",
+        },
+        info: {
+          DEFAULT: "#68C3D4", // Bold Turquoise
+          foreground: "#0D0D0D",
         },
         muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
+          DEFAULT: "#F5EFB3", // Pastel Yellow
+          foreground: "#0D0D0D",
         },
         accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
+          DEFAULT: "#F78FA7", // Coral Pink
+          foreground: "#0D0D0D",
         },
         card: {
           DEFAULT: "rgba(255, 255, 255, 0.95)",
-          foreground: "#1a1a1a",
+          foreground: "#0D0D0D",
         },
       },
       borderRadius: {
