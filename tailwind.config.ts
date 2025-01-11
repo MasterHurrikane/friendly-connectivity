@@ -22,7 +22,7 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "#F2E8C9", // Keep for fallback
+        background: "transparent", // Changed from cream color to transparent
         foreground: "#0D0D0D",
         primary: {
           DEFAULT: "#68C3D4",
