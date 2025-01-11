@@ -9,6 +9,8 @@ import Dashboard from "@/pages/Dashboard";
 import Index from "@/pages/Index";
 import Profile from "@/pages/Profile";
 import AddFriend from "@/pages/AddFriend";
+import SearchFriends from "@/pages/friends/SearchFriends";
+import DiscoverFriends from "@/pages/friends/DiscoverFriends";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export const router = createBrowserRouter([
@@ -35,6 +37,16 @@ export const router = createBrowserRouter([
   {
     path: "add",
     element: <AddFriend />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "search",
+    element: <SearchFriends />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "discover",
+    element: <DiscoverFriends />,
     errorElement: <ErrorBoundary />,
   },
   ...authRoutes,
