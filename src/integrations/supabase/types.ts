@@ -9,6 +9,44 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      app_permissions: {
+        Row: {
+          camera_access: boolean | null
+          contacts_access: boolean | null
+          created_at: string | null
+          id: string
+          location_access: boolean | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          camera_access?: boolean | null
+          contacts_access?: boolean | null
+          created_at?: string | null
+          id?: string
+          location_access?: boolean | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          camera_access?: boolean | null
+          contacts_access?: boolean | null
+          created_at?: string | null
+          id?: string
+          location_access?: boolean | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "app_permissions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       blocked_users: {
         Row: {
           blocked_user_id: string | null
@@ -38,6 +76,41 @@ export type Database = {
           },
           {
             foreignKeyName: "blocked_users_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      data_export_requests: {
+        Row: {
+          completed_at: string | null
+          created_at: string | null
+          id: string
+          request_type: string
+          status: string | null
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          request_type: string
+          status?: string | null
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          request_type?: string
+          status?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "data_export_requests_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"

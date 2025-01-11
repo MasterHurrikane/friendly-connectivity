@@ -9,6 +9,7 @@ import Calendar from "@/pages/Calendar";
 import Dashboard from "@/pages/Dashboard";
 import Index from "@/pages/Index";
 import Profile from "@/pages/Profile";
+import Settings from "@/pages/Settings";
 import AddFriend from "@/pages/AddFriend";
 import SearchFriends from "@/pages/friends/SearchFriends";
 import DiscoverFriends from "@/pages/friends/DiscoverFriends";
@@ -34,6 +35,11 @@ export const router = createBrowserRouter([
   {
     path: "profile",
     element: <Profile />,
+    errorElement: <ErrorBoundary />,
+  },
+  {
+    path: "settings",
+    element: <Settings />,
     errorElement: <ErrorBoundary />,
   },
   {
