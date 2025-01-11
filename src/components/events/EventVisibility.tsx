@@ -15,13 +15,13 @@ export const EventVisibility = ({ form }: EventVisibilityProps) => {
       name="visibility"
       render={({ field }) => (
         <FormItem className="text-left">
-          <FormLabel className="text-sm font-normal">Event Visibility</FormLabel>
+          <FormLabel className="text-left">Event Visibility</FormLabel>
           <Select 
             onValueChange={field.onChange} 
             defaultValue={field.value}
           >
             <FormControl>
-              <SelectTrigger className="text-foreground/70">
+              <SelectTrigger>
                 <SelectValue placeholder="Select visibility" />
               </SelectTrigger>
             </FormControl>

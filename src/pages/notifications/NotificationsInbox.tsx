@@ -59,18 +59,8 @@ const NotificationsInbox = () => {
         <div className="max-w-2xl mx-auto mt-6">
           <Tabs defaultValue="all" className="w-full">
             <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger 
-                value="all" 
-                className="transition-colors duration-200 hover:bg-primary/20 data-[state=active]:hover:bg-primary"
-              >
-                All
-              </TabsTrigger>
-              <TabsTrigger 
-                value="unread"
-                className="transition-colors duration-200 hover:bg-primary/20 data-[state=active]:hover:bg-primary"
-              >
-                Unread
-              </TabsTrigger>
+              <TabsTrigger value="all">All</TabsTrigger>
+              <TabsTrigger value="unread">Unread</TabsTrigger>
             </TabsList>
             <TabsContent value="all" className="mt-4">
               {notifications.map((notification) => (
