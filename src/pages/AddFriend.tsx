@@ -21,7 +21,7 @@ const AddContact = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-page">
+    <div className="min-h-screen">
       <Navigation />
       <main className="p-6 md:ml-64">
         <PageHeader
@@ -143,7 +143,7 @@ const AddContact = () => {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default AddContact
+export default AddContact;
