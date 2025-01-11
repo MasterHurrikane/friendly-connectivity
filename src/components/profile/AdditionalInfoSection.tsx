@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { Badge } from "@/components/ui/badge";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 export const AdditionalInfoSection = () => {
   const [newInterest, setNewInterest] = useState("");
@@ -49,9 +50,9 @@ export const AdditionalInfoSection = () => {
     }
   };
 
-  const addInterest = async (interest: string) => {
-    if (!interest.trim() || !profile?.interests) return;
-    const updatedInterests = [...(profile.interests || []), interest.trim()];
+  const addInterest = async () => {
+    if (!newInterest.trim() || !profile?.interests) return;
+    const updatedInterests = [...(profile.interests || []), newInterest.trim()];
     await handleUpdate("interests", updatedInterests);
     setNewInterest("");
   };
@@ -62,9 +63,9 @@ export const AdditionalInfoSection = () => {
     await handleUpdate("interests", updatedInterests);
   };
 
-  const addHobby = async (hobby: string) => {
-    if (!hobby.trim() || !profile?.hobbies) return;
-    const updatedHobbies = [...(profile.hobbies || []), hobby.trim()];
+  const addHobby = async () => {
+    if (!newHobby.trim() || !profile?.hobbies) return;
+    const updatedHobbies = [...(profile.hobbies || []), newHobby.trim()];
     await handleUpdate("hobbies", updatedHobbies);
     setNewHobby("");
   };
@@ -105,10 +106,16 @@ export const AdditionalInfoSection = () => {
               id="interests"
               value={newInterest}
               onChange={(e) => setNewInterest(e.target.value)}
-              placeholder="Add an interest"
+              placeholder="Enter an interest"
               className="bg-white"
-              onKeyPress={(e) => e.key === 'Enter' && addInterest(newInterest)}
             />
+            <Button 
+              onClick={addInterest}
+              variant="secondary"
+              className="whitespace-nowrap"
+            >
+              Add Interest
+            </Button>
           </div>
         </div>
 
@@ -131,10 +138,16 @@ export const AdditionalInfoSection = () => {
               id="hobbies"
               value={newHobby}
               onChange={(e) => setNewHobby(e.target.value)}
-              placeholder="Add a hobby"
+              placeholder="Enter a hobby"
               className="bg-white"
-              onKeyPress={(e) => e.key === 'Enter' && addHobby(newHobby)}
             />
+            <Button 
+              onClick={addHobby}
+              variant="secondary"
+              className="whitespace-nowrap"
+            >
+              Add Hobby
+            </Button>
           </div>
         </div>
 
