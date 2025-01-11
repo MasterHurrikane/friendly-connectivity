@@ -21,7 +21,7 @@ export const EventVisibility = ({ form }: EventVisibilityProps) => {
             defaultValue={field.value}
           >
             <FormControl>
-              <SelectTrigger>
+              <SelectTrigger className="bg-white">
                 <SelectValue placeholder="Select visibility" />
               </SelectTrigger>
             </FormControl>
