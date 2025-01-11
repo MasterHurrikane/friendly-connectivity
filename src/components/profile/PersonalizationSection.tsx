@@ -12,7 +12,7 @@ export const PersonalizationSection = () => {
     >
       <div className="space-y-6">
         <div>
-          <Label className="block mb-1.5">Theme Preference</Label>
+          <Label className="block mb-1.5 text-left">Theme Preference</Label>
           <RadioGroup defaultValue="light" className="grid grid-cols-2 gap-4 bg-white/50 p-2 rounded-md">
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="light" id="light" />
@@ -26,7 +26,7 @@ export const PersonalizationSection = () => {
         </div>
 
         <div>
-          <Label className="block mb-1.5">Language</Label>
+          <Label className="block mb-1.5 text-left">Language</Label>
           <RadioGroup defaultValue="en" className="grid grid-cols-2 gap-4 bg-white/50 p-2 rounded-md">
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="en" id="en" />

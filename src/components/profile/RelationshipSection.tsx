@@ -41,7 +41,7 @@ export const RelationshipSection = () => {
     >
       <div className="space-y-6">
         <div className="space-y-2">
-          <Label>Default Groups</Label>
+          <Label className="block mb-1.5 text-left">Default Groups</Label>
           <div className="grid grid-cols-2 gap-2">
             <Button variant="outline">Family</Button>
             <Button variant="outline">Friends</Button>
@@ -51,7 +51,7 @@ export const RelationshipSection = () => {
         </div>
 
         <div className="space-y-4">
-          <Label>Custom Groups</Label>
+          <Label className="block mb-1.5 text-left">Custom Groups</Label>
           <div className="flex gap-2">
             <Input
               placeholder="Add a custom group (e.g., Book Club)"

@@ -12,7 +12,7 @@ export const AdditionalInfoSection = () => {
     >
       <div className="space-y-4">
         <div>
-          <Label htmlFor="bio" className="block mb-1.5">Bio</Label>
+          <Label htmlFor="bio" className="block mb-1.5 text-left">Bio</Label>
           <textarea
             id="bio"
             className="w-full min-h-[100px] p-2 border rounded-md bg-white/50"
@@ -20,7 +20,7 @@ export const AdditionalInfoSection = () => {
           />
         </div>
         <div>
-          <Label htmlFor="location" className="block mb-1.5">Location</Label>
+          <Label htmlFor="location" className="block mb-1.5 text-left">Location</Label>
           <Input id="location" placeholder="City, Country" className="bg-white/50" />
         </div>
       </div>
