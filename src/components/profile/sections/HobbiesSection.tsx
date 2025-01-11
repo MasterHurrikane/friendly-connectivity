@@ -29,7 +29,7 @@ export const HobbiesSection = ({ profile, onUpdate }: HobbiesSectionProps) => {
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       <Label htmlFor="hobbies" className="text-left block text-lg font-bold">Hobbies</Label>
       <div className="flex flex-wrap gap-2 min-h-[2.5rem]">
         {profile?.hobbies?.map((hobby: string) => (

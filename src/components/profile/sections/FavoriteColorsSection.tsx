@@ -29,7 +29,7 @@ export const FavoriteColorsSection = ({ profile, onUpdate }: FavoriteColorsSecti
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       <Label htmlFor="favoriteColor" className="text-left block text-lg font-bold">Favorite Colors</Label>
       <div className="flex flex-wrap gap-2 min-h-[2.5rem]">
         {profile?.favorite_colors?.map((color: string) => (

@@ -29,7 +29,7 @@ export const FoodTypesSection = ({ profile, onUpdate }: FoodTypesSectionProps) =
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       <Label htmlFor="foodTypes" className="text-left block text-lg font-bold">Favorite Food Types</Label>
       <div className="flex flex-wrap gap-2 min-h-[2.5rem]">
         {profile?.favorite_food_types?.map((foodType: string) => (
