@@ -1,5 +1,6 @@
 import { Contact } from "@/data/dummyContacts";
 import { Badge } from "@/components/ui/badge";
+import { ContactAvatar } from "./ContactAvatar";
 
 interface ContactBasicInfoProps {
   contact: Contact;
@@ -9,10 +10,10 @@ interface ContactBasicInfoProps {
 export const ContactBasicInfo = ({ contact, friendshipDuration }: ContactBasicInfoProps) => {
   return (
     <div className="flex items-start space-x-6">
-      <img
-        src={contact.avatar}
-        alt={contact.name}
-        className="w-24 h-24 rounded-full object-cover"
+      <ContactAvatar 
+        avatar={contact.avatar} 
+        name={contact.name} 
+        className="w-24 h-24"
       />
       <div className="space-y-4 flex-1">
         <div>
