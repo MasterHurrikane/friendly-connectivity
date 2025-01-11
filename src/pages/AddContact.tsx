@@ -56,7 +56,7 @@ const AddContact = () => {
             </div>
             
             <Button type="submit" className="w-full">
-              Add Contact
+              Add Friend
             </Button>
           </form>
         </div>
