@@ -54,7 +54,7 @@ const Dashboard = () => {
       <Navigation />
       <main className="p-6 md:ml-64">
         <div className="text-left">
-          <div className="mb-6">
+          <div className="flex justify-center mb-6">
             <img
               src="/lovable-uploads/f5f0433b-454b-4240-8e58-f20d8836ec72.png"
               alt="Friendly Logo"
