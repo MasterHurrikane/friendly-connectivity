@@ -19,8 +19,7 @@ const Profile = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  // Fetch the current user's session
-  const { data: session } = useQuery({
+  const { data: session, isLoading: isSessionLoading } = useQuery({
     queryKey: ["session"],
     queryFn: async () => {
       const { data: { session }, error } = await supabase.auth.getSession();
@@ -29,8 +28,7 @@ const Profile = () => {
     },
   });
 
-  // Fetch the user's profile data
-  const { data: profile, isLoading } = useQuery({
+  const { data: profile, isLoading: isProfileLoading } = useQuery({
     queryKey: ["profile", session?.user?.id],
     queryFn: async () => {
       if (!session?.user?.id) return null;
@@ -38,7 +36,7 @@ const Profile = () => {
         .from("profiles")
         .select("*")
         .eq("id", session.user.id)
-        .single();
+        .maybeSingle();
       
       if (error) throw error;
       return data;
@@ -46,16 +44,14 @@ const Profile = () => {
     enabled: !!session?.user?.id,
   });
 
-  // Redirect to login if no session
   useEffect(() => {
-    if (!session && !isLoading) {
-      navigate("/login");
+    if (!isSessionLoading && !session) {
+      navigate("/auth/login");
     }
-  }, [session, isLoading, navigate]);
+  }, [session, isSessionLoading, navigate]);
 
   const handleShare = () => {
-    const shareableLink = window.location.href;
-    navigator.clipboard.writeText(shareableLink);
+    navigator.clipboard.writeText(window.location.href);
     toast({
       title: "Link copied!",
       description: "The profile link has been copied to your clipboard.",
@@ -63,7 +59,7 @@ const Profile = () => {
     });
   };
 
-  if (isLoading) {
+  if (isSessionLoading || isProfileLoading) {
     return (
       <div className="min-h-screen bg-gradient-page">
         <Navigation />
@@ -89,7 +85,7 @@ const Profile = () => {
           <Button 
             onClick={handleShare}
             variant="secondary"
-            className="flex items-center gap-2 hover:bg-secondary/90"
+            className="flex items-center gap-2"
           >
             <Share2 className="w-4 h-4" />
             Share Profile
