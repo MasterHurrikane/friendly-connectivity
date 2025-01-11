@@ -11,6 +11,8 @@ import { Button } from "@/components/ui/button";
 export const AdditionalInfoSection = () => {
   const [newInterest, setNewInterest] = useState("");
   const [newHobby, setNewHobby] = useState("");
+  const [newFoodType, setNewFoodType] = useState("");
+  const [newMusicGenre, setNewMusicGenre] = useState("");
 
   const { data: session } = useQuery({
     queryKey: ["session"],
@@ -74,6 +76,32 @@ export const AdditionalInfoSection = () => {
     if (!profile?.hobbies) return;
     const updatedHobbies = profile.hobbies.filter(h => h !== hobby);
     await handleUpdate("hobbies", updatedHobbies);
+  };
+
+  const addFoodType = async () => {
+    if (!newFoodType.trim()) return;
+    const updatedFoodTypes = [...(profile?.favorite_food_types || []), newFoodType.trim()];
+    await handleUpdate("favorite_food_types", updatedFoodTypes);
+    setNewFoodType("");
+  };
+
+  const removeFoodType = async (foodType: string) => {
+    if (!profile?.favorite_food_types) return;
+    const updatedFoodTypes = profile.favorite_food_types.filter(f => f !== foodType);
+    await handleUpdate("favorite_food_types", updatedFoodTypes);
+  };
+
+  const addMusicGenre = async () => {
+    if (!newMusicGenre.trim()) return;
+    const updatedMusicGenres = [...(profile?.favorite_music_genres || []), newMusicGenre.trim()];
+    await handleUpdate("favorite_music_genres", updatedMusicGenres);
+    setNewMusicGenre("");
+  };
+
+  const removeMusicGenre = async (genre: string) => {
+    if (!profile?.favorite_music_genres) return;
+    const updatedMusicGenres = profile.favorite_music_genres.filter(g => g !== genre);
+    await handleUpdate("favorite_music_genres", updatedMusicGenres);
   };
 
   if (isLoading) {
@@ -147,6 +175,70 @@ export const AdditionalInfoSection = () => {
               className="whitespace-nowrap"
             >
               Add Hobby
+            </Button>
+          </div>
+        </div>
+
+        <div>
+          <Label htmlFor="foodTypes" className="block mb-1.5 text-left">Favorite Food Types</Label>
+          <div className="flex flex-wrap gap-2 mb-2">
+            {profile?.favorite_food_types?.map((foodType: string) => (
+              <Badge 
+                key={foodType}
+                variant="secondary"
+                className="cursor-pointer hover:bg-destructive/20"
+                onClick={() => removeFoodType(foodType)}
+              >
+                {foodType} ×
+              </Badge>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <Input
+              id="foodTypes"
+              value={newFoodType}
+              onChange={(e) => setNewFoodType(e.target.value)}
+              placeholder="Enter a food type"
+              className="bg-white"
+            />
+            <Button 
+              onClick={addFoodType}
+              variant="secondary"
+              className="whitespace-nowrap"
+            >
+              Add Food Type
+            </Button>
+          </div>
+        </div>
+
+        <div>
+          <Label htmlFor="musicGenres" className="block mb-1.5 text-left">Favorite Music Genres</Label>
+          <div className="flex flex-wrap gap-2 mb-2">
+            {profile?.favorite_music_genres?.map((genre: string) => (
+              <Badge 
+                key={genre}
+                variant="secondary"
+                className="cursor-pointer hover:bg-destructive/20"
+                onClick={() => removeMusicGenre(genre)}
+              >
+                {genre} ×
+              </Badge>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <Input
+              id="musicGenres"
+              value={newMusicGenre}
+              onChange={(e) => setNewMusicGenre(e.target.value)}
+              placeholder="Enter a music genre"
+              className="bg-white"
+            />
+            <Button 
+              onClick={addMusicGenre}
+              variant="secondary"
+              className="whitespace-nowrap"
+            >
+              Add Music Genre
             </Button>
           </div>
         </div>
