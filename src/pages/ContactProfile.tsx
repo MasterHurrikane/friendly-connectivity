@@ -6,11 +6,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 
-const ContactProfile = () => {
-  const { id } = useParams();
-  // In a real app, you would fetch the contact data using the id
-  // For now, we'll use dummy data
-  const contact = {
+// This would typically come from an API or database
+const dummyContacts = [
+  {
     id: "1",
     name: "John Doe",
     nickname: "Johnny",
@@ -27,7 +25,56 @@ const ContactProfile = () => {
     timezone: "PST",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=John",
     notes: "Met at the local tech meetup. Loves hiking and photography."
-  };
+  },
+  {
+    id: "2",
+    name: "Jane Smith",
+    nickname: "Janey",
+    category: "Family",
+    lastInteraction: "1 week ago",
+    email: "jane@example.com",
+    phone: "+1 (555) 987-6543",
+    birthday: "July 22",
+    anniversary: "August 15",
+    spouse: "Mike Smith",
+    children: "Emma (4)",
+    metDate: "2021-06-15",
+    city: "New York",
+    timezone: "EST",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jane",
+    notes: "My cousin from New York. Amazing baker and always brings cookies."
+  },
+  {
+    id: "3",
+    name: "Bob Wilson",
+    nickname: "Bobby",
+    category: "Work",
+    lastInteraction: "Yesterday",
+    email: "bob@example.com",
+    phone: "+1 (555) 246-8135",
+    birthday: "December 5",
+    metDate: "2023-01-10",
+    city: "Chicago",
+    timezone: "CST",
+    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Bob",
+    notes: "Met at the company retreat. Great team player and mentor."
+  }
+];
+
+const ContactProfile = () => {
+  const { id } = useParams();
+  const contact = dummyContacts.find(c => c.id === id);
+
+  if (!contact) {
+    return (
+      <div className="min-h-screen bg-gradient-page">
+        <Navigation />
+        <main className="p-6 md:ml-64">
+          <h1>Contact not found</h1>
+        </main>
+      </div>
+    );
+  }
 
   const calculateFriendshipDuration = (date: string) => {
     const start = new Date(date);
