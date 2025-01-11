@@ -1,40 +1,29 @@
+import { RouteObject } from "react-router-dom";
 import Friends from "@/pages/Friends";
 import FriendProfile from "@/pages/FriendProfile";
 import AddFriend from "@/pages/friends/AddFriend";
-import ManageGroups from "@/pages/friends/ManageGroups";
-import GroupDetails from "@/pages/friends/GroupDetails";
-import { ErrorBoundary } from "@/components/ErrorBoundary";
-import AddFriendManual from "@/pages/AddFriend";
+import { SearchFriends } from "@/pages/friends/SearchFriends";
+import DiscoverFriends from "@/pages/friends/DiscoverFriends";
 
-export const friendRoutes = [
+export const friendRoutes: RouteObject[] = [
   {
-    path: "friends",
+    path: "/friends",
     element: <Friends />,
-    errorElement: <ErrorBoundary />,
   },
   {
-    path: "friends/:id",
+    path: "/friends/:id",
     element: <FriendProfile />,
-    errorElement: <ErrorBoundary />,
   },
   {
-    path: "add-friend",
+    path: "/add-friend",
     element: <AddFriend />,
-    errorElement: <ErrorBoundary />,
   },
   {
-    path: "add",
-    element: <AddFriendManual />,
-    errorElement: <ErrorBoundary />,
+    path: "/search",
+    element: <SearchFriends />,
   },
   {
-    path: "friends/groups",
-    element: <ManageGroups />,
-    errorElement: <ErrorBoundary />,
-  },
-  {
-    path: "friends/groups/:id",
-    element: <GroupDetails />,
-    errorElement: <ErrorBoundary />,
+    path: "/discover",
+    element: <DiscoverFriends />,
   },
 ];
