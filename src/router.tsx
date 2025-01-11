@@ -7,6 +7,11 @@ import ActivityFeed from "@/pages/activity/ActivityFeed";
 import EngagementStats from "@/pages/activity/EngagementStats";
 import SharedMemories from "@/pages/activity/SharedMemories";
 import FriendActivity from "@/pages/activity/FriendActivity";
+import NotificationsInbox from "@/pages/notifications/NotificationsInbox";
+import PriorityNotifications from "@/pages/notifications/PriorityNotifications";
+import NotificationSettings from "@/pages/notifications/NotificationSettings";
+import EventReminders from "@/pages/notifications/EventReminders";
+import GroupNotifications from "@/pages/notifications/GroupNotifications";
 
 export const router = createBrowserRouter([
   {
@@ -40,5 +45,25 @@ export const router = createBrowserRouter([
   {
     path: "/activity/:id",
     element: <FriendActivity />,
+  },
+  {
+    path: "/notifications",
+    element: <NotificationsInbox />,
+  },
+  {
+    path: "/notifications/priority",
+    element: <PriorityNotifications />,
+  },
+  {
+    path: "/notifications/settings",
+    element: <NotificationSettings />,
+  },
+  {
+    path: "/notifications/events",
+    element: <EventReminders />,
+  },
+  {
+    path: "/notifications/groups",
+    element: <GroupNotifications />,
   },
 ]);
