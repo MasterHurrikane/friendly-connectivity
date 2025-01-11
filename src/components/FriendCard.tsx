@@ -26,12 +26,12 @@ const FriendCard = ({ friend }: FriendCardProps) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white/90 backdrop-blur-sm rounded-xl p-10 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 cursor-pointer"
+      className="bg-white/90 backdrop-blur-sm rounded-xl p-6 md:p-10 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 cursor-pointer"
       onClick={handleCardClick}
     >
-      <div className="flex justify-between items-start gap-8">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-4 md:gap-8">
         <div className="flex items-start space-x-4">
-          <FriendAvatar avatar={friend.avatar} name={friend.name} className="w-16 h-16" />
+          <FriendAvatar avatar={friend.avatar} name={friend.name} className="w-12 h-12 md:w-16 md:h-16" />
           <div className="flex-1">
             <FriendHeader
               name={friend.name}
@@ -64,7 +64,7 @@ const FriendCard = ({ friend }: FriendCardProps) => {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center space-y-3 min-w-[200px]">
+        <div className="flex flex-row md:flex-col items-center justify-between md:justify-center space-x-4 md:space-x-0 md:space-y-3 min-w-[200px] mt-4 md:mt-0 border-t md:border-t-0 pt-4 md:pt-0">
           <p className="text-sm text-gray-500 text-center">
             Last interaction: {friend.lastInteraction || "No recent interaction"}
           </p>
