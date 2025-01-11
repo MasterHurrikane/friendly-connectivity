@@ -11,10 +11,20 @@ import { suggestedFriends } from "@/data/dummyFriends";
 import { useMutation } from "@tanstack/react-query";
 import { sendFriendRequest } from "@/utils/friendUtils";
 import { supabase } from "@/integrations/supabase/client";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { useState } from "react";
 
 const DiscoverFriends = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [selectedFriend, setSelectedFriend] = useState<typeof suggestedFriends[0] | null>(null);
 
   const sendRequestMutation = useMutation({
     mutationFn: async (friendId: string) => {
@@ -43,8 +53,15 @@ const DiscoverFriends = () => {
     },
   });
 
-  const handleConnect = (friendId: string) => {
-    sendRequestMutation.mutate(friendId);
+  const handleConnect = (friend: typeof suggestedFriends[0]) => {
+    setSelectedFriend(friend);
+  };
+
+  const handleConfirmConnect = () => {
+    if (selectedFriend) {
+      sendRequestMutation.mutate(selectedFriend.id);
+      setSelectedFriend(null);
+    }
   };
 
   const categories = [
@@ -108,7 +125,7 @@ const DiscoverFriends = () => {
                         ))}
                       </div>
                       <Button
-                        onClick={() => handleConnect(friend.id)}
+                        onClick={() => handleConnect(friend)}
                         className="mt-4 w-full"
                         size="sm"
                         disabled={sendRequestMutation.isPending}
@@ -146,6 +163,25 @@ const DiscoverFriends = () => {
             </div>
           </TabsContent>
         </Tabs>
+
+        <Dialog open={!!selectedFriend} onOpenChange={() => setSelectedFriend(null)}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Connect with {selectedFriend?.name}</DialogTitle>
+              <DialogDescription>
+                Would you like to send a friend request to {selectedFriend?.name}? They will be notified of your request.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter className="flex space-x-2 justify-end">
+              <Button variant="outline" onClick={() => setSelectedFriend(null)}>
+                Cancel
+              </Button>
+              <Button onClick={handleConfirmConnect} disabled={sendRequestMutation.isPending}>
+                {sendRequestMutation.isPending ? "Sending..." : "Send Request"}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </main>
     </div>
   );
