@@ -5,6 +5,9 @@ import { UserCircle } from "lucide-react";
 import { ProfileSection } from "./ProfileSection";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { Database } from "@/integrations/supabase/types";
+
+type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 
 export const BasicProfileSection = () => {
   const { data: session } = useQuery({
@@ -32,12 +35,12 @@ export const BasicProfileSection = () => {
     enabled: !!session?.user?.id,
   });
 
-  const handleUpdate = async (field: string, value: string) => {
+  const handleUpdate = async (field: keyof Profile, value: string) => {
     if (!session?.user?.id) return;
     
     const { error } = await supabase
       .from("profiles")
-      .update({ [field]: value })
+      .update({ id: session.user.id, [field]: value })
       .eq("id", session.user.id);
 
     if (error) {
