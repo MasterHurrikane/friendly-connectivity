@@ -37,7 +37,7 @@ export const FriendProfileContent = ({
 
   return (
     <Card>
-      <CardContent className="p-6">
+      <CardContent className="p-10">
         <div className="flex justify-between items-start mb-6">
           <FriendBasicInfo 
             friend={friend}

@@ -26,7 +26,7 @@ const FriendCard = ({ friend }: FriendCardProps) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 cursor-pointer"
+      className="bg-white/90 backdrop-blur-sm rounded-xl p-10 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 cursor-pointer"
       onClick={handleCardClick}
     >
       <div className="flex items-start space-x-4">
@@ -61,13 +61,14 @@ const FriendCard = ({ friend }: FriendCardProps) => {
             )}
           </div>
 
-          <div className="mt-4 flex items-center justify-between">
+          <div className="mt-6 flex items-center justify-between">
             <p className="text-sm text-gray-500">
               Last interaction: {friend.lastInteraction || "No recent interaction"}
             </p>
             <Button
-              variant="outline"
+              variant="default"
               size="sm"
+              className="bg-[#30adc4] hover:bg-[#2b9cb1]"
               onClick={(e) => {
                 e.stopPropagation();
                 navigate(`/friends/${friend.id}/activity`);

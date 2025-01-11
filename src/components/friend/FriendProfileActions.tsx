@@ -60,8 +60,9 @@ export const FriendProfileActions = ({
   return (
     <div className="flex gap-2">
       <Button
-        variant="outline"
+        variant="default"
         size="sm"
+        className="bg-[#30adc4] hover:bg-[#2b9cb1]"
         onClick={() => navigate(`/friends/${id}/activity`)}
       >
         <Activity className="w-4 h-4 mr-2" />
