@@ -12,6 +12,13 @@ import PriorityNotifications from "@/pages/notifications/PriorityNotifications";
 import NotificationSettings from "@/pages/notifications/NotificationSettings";
 import EventReminders from "@/pages/notifications/EventReminders";
 import GroupNotifications from "@/pages/notifications/GroupNotifications";
+import CreateEvent from "@/pages/events/CreateEvent";
+import InviteFriends from "@/pages/events/InviteFriends";
+import EventDetails from "@/pages/events/EventDetails";
+import EventRSVP from "@/pages/events/EventRSVP";
+import EventTimeline from "@/pages/events/EventTimeline";
+import EventPhotos from "@/pages/events/EventPhotos";
+import PastEvents from "@/pages/events/PastEvents";
 
 export const router = createBrowserRouter([
   {
@@ -65,5 +72,33 @@ export const router = createBrowserRouter([
   {
     path: "/notifications/groups",
     element: <GroupNotifications />,
+  },
+  {
+    path: "/events/create",
+    element: <CreateEvent />,
+  },
+  {
+    path: "/events/:id/invite",
+    element: <InviteFriends />,
+  },
+  {
+    path: "/events/:id",
+    element: <EventDetails />,
+  },
+  {
+    path: "/events/:id/rsvp",
+    element: <EventRSVP />,
+  },
+  {
+    path: "/events/:id/timeline",
+    element: <EventTimeline />,
+  },
+  {
+    path: "/events/:id/photos",
+    element: <EventPhotos />,
+  },
+  {
+    path: "/events/past",
+    element: <PastEvents />,
   },
 ]);

@@ -13,8 +13,8 @@ const Navigation = () => {
     { path: "/contacts", icon: Users, label: "Friends" },
     { path: "/activity", icon: Activity, label: "Activity" },
     { path: "/notifications", icon: Bell, label: "Notifications" },
+    { path: "/events/create", icon: Calendar, label: "Create Event" },
     { path: "/add", icon: UserPlus, label: "Add Friend" },
-    { path: "/calendar", icon: Calendar, label: "Calendar" },
   ];
 
   return (
