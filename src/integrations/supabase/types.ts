@@ -243,6 +243,8 @@ export type Database = {
           currency: string | null
           date_format: string | null
           favorite_color: string | null
+          favorite_food_types: string[] | null
+          favorite_music_genres: string[] | null
           first_name: string | null
           hobbies: string[] | null
           id: string
@@ -265,6 +267,8 @@ export type Database = {
           currency?: string | null
           date_format?: string | null
           favorite_color?: string | null
+          favorite_food_types?: string[] | null
+          favorite_music_genres?: string[] | null
           first_name?: string | null
           hobbies?: string[] | null
           id: string
@@ -287,6 +291,8 @@ export type Database = {
           currency?: string | null
           date_format?: string | null
           favorite_color?: string | null
+          favorite_food_types?: string[] | null
+          favorite_music_genres?: string[] | null
           first_name?: string | null
           hobbies?: string[] | null
           id?: string
