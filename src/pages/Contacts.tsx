@@ -42,7 +42,7 @@ const Contacts = () => {
       <Navigation />
       <main className="p-6 md:ml-64">
         <PageHeader
-          title="Contacts"
+          title="Friends"
           description="Manage your network of connections"
           icon={Users}
         />

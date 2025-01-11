@@ -10,7 +10,7 @@ const Navigation = () => {
   const navItems = [
     { path: "/", icon: Home, label: "Dashboard" },
     { path: "/profile", icon: UserCircle, label: "My Profile" },
-    { path: "/contacts", icon: Users, label: "Contacts" },
+    { path: "/contacts", icon: Users, label: "Friends" },
     { path: "/add", icon: UserPlus, label: "Add Contact" },
     { path: "/calendar", icon: Calendar, label: "Calendar" },
   ];
