@@ -178,7 +178,7 @@ const ManageGroups = () => {
                 Create New Group
               </Button>
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="bg-white">
               <DialogHeader>
                 <DialogTitle>Create New Group</DialogTitle>
               </DialogHeader>
