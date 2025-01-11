@@ -26,10 +26,10 @@ export const AppPermissionsSection = () => {
         .from("app_permissions")
         .select("*")
         .eq("user_id", session.user.id)
-        .single();
+        .maybeSingle();
       
-      if (error) throw error;
-      return data;
+      if (error && error.code !== "PGRST116") throw error;
+      return data || { camera_access: false, location_access: false, contacts_access: false };
     },
     enabled: !!session?.user?.id,
   });
