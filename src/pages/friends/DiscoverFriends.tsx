@@ -1,4 +1,5 @@
 import { Compass, Users, Calendar } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Card } from "@/components/ui/card";
@@ -7,16 +8,43 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { suggestedFriends } from "@/data/dummyFriends";
+import { useMutation } from "@tanstack/react-query";
+import { sendFriendRequest } from "@/utils/friendUtils";
+import { supabase } from "@/integrations/supabase/client";
 
 const DiscoverFriends = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
 
-  const handleConnect = (name: string) => {
-    toast({
-      title: "Connection Request Sent",
-      description: `A friend request has been sent to ${name}`,
-      duration: 3000,
-    });
+  const sendRequestMutation = useMutation({
+    mutationFn: async (friendId: string) => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error("Not authenticated");
+      
+      await sendFriendRequest(friendId);
+      return friendId;
+    },
+    onSuccess: (_, friendId) => {
+      const friend = suggestedFriends.find(f => f.id === friendId);
+      toast({
+        title: "Friend Request Sent",
+        description: `A friend request has been sent to ${friend?.name}`,
+        duration: 3000,
+      });
+      navigate("/friends");
+    },
+    onError: (error) => {
+      console.error("Error sending friend request:", error);
+      toast({
+        title: "Error",
+        description: "Failed to send friend request. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleConnect = (friendId: string) => {
+    sendRequestMutation.mutate(friendId);
   };
 
   const categories = [
@@ -80,12 +108,13 @@ const DiscoverFriends = () => {
                         ))}
                       </div>
                       <Button
-                        onClick={() => handleConnect(friend.name)}
+                        onClick={() => handleConnect(friend.id)}
                         className="mt-4 w-full"
                         size="sm"
+                        disabled={sendRequestMutation.isPending}
                       >
                         <Users className="w-4 h-4 mr-2" />
-                        Connect
+                        {sendRequestMutation.isPending ? "Sending..." : "Connect"}
                       </Button>
                     </div>
                   </div>
