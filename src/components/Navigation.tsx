@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Users, Home, UserPlus, Calendar, UserCircle } from "lucide-react";
+import { Users, Home, UserPlus, Calendar, UserCircle, Activity } from "lucide-react";
 
 const Navigation = () => {
   const location = useLocation();
@@ -11,6 +11,7 @@ const Navigation = () => {
     { path: "/", icon: Home, label: "Dashboard" },
     { path: "/profile", icon: UserCircle, label: "My Profile" },
     { path: "/contacts", icon: Users, label: "Friends" },
+    { path: "/activity", icon: Activity, label: "Activity" },
     { path: "/add", icon: UserPlus, label: "Add Friend" },
     { path: "/calendar", icon: Calendar, label: "Calendar" },
   ];
