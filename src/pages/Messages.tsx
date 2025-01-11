@@ -12,6 +12,15 @@ import { Input } from "@/components/ui/input";
 const Messages = () => {
   const [newMessage, setNewMessage] = useState("");
   const [currentConversationId, setCurrentConversationId] = useState<string | null>(null);
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setCurrentUserId(user?.id || null);
+    };
+    getCurrentUser();
+  }, []);
 
   const { data: conversations, isLoading: conversationsLoading } = useQuery({
     queryKey: ["conversations"],
@@ -60,12 +69,12 @@ const Messages = () => {
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newMessage.trim() || !currentConversationId) return;
+    if (!newMessage.trim() || !currentConversationId || !currentUserId) return;
 
     const { error } = await supabase.from("messages").insert({
       conversation_id: currentConversationId,
       content: newMessage,
-      sender_id: (await supabase.auth.getUser()).data.user?.id,
+      sender_id: currentUserId,
     });
 
     if (!error) {
@@ -146,14 +155,14 @@ const Messages = () => {
                         <div
                           key={message.id}
                           className={`flex ${
-                            message.sender.id === (supabase.auth.getUser()).data?.user?.id
+                            message.sender.id === currentUserId
                               ? "justify-end"
                               : "justify-start"
                           }`}
                         >
                           <div
                             className={`max-w-[70%] p-3 rounded-lg ${
-                              message.sender.id === (supabase.auth.getUser()).data?.user?.id
+                              message.sender.id === currentUserId
                                 ? "bg-blue-500 text-white"
                                 : "bg-gray-100"
                             }`}
