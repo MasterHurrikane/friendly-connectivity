@@ -25,7 +25,7 @@ export default {
         background: "transparent",
         foreground: "#0D0D0D",
         primary: {
-          DEFAULT: "#68C3D4",
+          DEFAULT: "#30adc4",
           foreground: "#ffffff",
         },
         secondary: {
