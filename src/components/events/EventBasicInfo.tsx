@@ -16,9 +16,13 @@ export const EventBasicInfo = ({ form }: EventBasicInfoProps) => {
         name="title"
         render={({ field }) => (
           <FormItem className="text-left">
-            <FormLabel className="text-left">Event Name</FormLabel>
+            <FormLabel className="text-sm font-normal">Event Name</FormLabel>
             <FormControl>
-              <Input placeholder="Enter event name" {...field} />
+              <Input 
+                placeholder="Enter event name" 
+                className="text-foreground/70"
+                {...field} 
+              />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -30,10 +34,11 @@ export const EventBasicInfo = ({ form }: EventBasicInfoProps) => {
         name="description"
         render={({ field }) => (
           <FormItem className="text-left">
-            <FormLabel className="text-left">Description</FormLabel>
+            <FormLabel className="text-sm font-normal">Description</FormLabel>
             <FormControl>
               <Textarea 
                 placeholder="What's this event about?"
+                className="text-foreground/70"
                 {...field}
               />
             </FormControl>
@@ -48,9 +53,13 @@ export const EventBasicInfo = ({ form }: EventBasicInfoProps) => {
           name="date"
           render={({ field }) => (
             <FormItem className="text-left">
-              <FormLabel className="text-left">Date</FormLabel>
+              <FormLabel className="text-sm font-normal">Date</FormLabel>
               <FormControl>
-                <Input type="date" {...field} />
+                <Input 
+                  type="date" 
+                  className="text-foreground/70"
+                  {...field} 
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -62,9 +71,13 @@ export const EventBasicInfo = ({ form }: EventBasicInfoProps) => {
           name="time"
           render={({ field }) => (
             <FormItem className="text-left">
-              <FormLabel className="text-left">Time</FormLabel>
+              <FormLabel className="text-sm font-normal">Time</FormLabel>
               <FormControl>
-                <Input type="time" {...field} />
+                <Input 
+                  type="time" 
+                  className="text-foreground/70"
+                  {...field} 
+                />
               </FormControl>
               <FormMessage />
             </FormItem>

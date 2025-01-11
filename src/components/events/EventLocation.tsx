@@ -38,7 +38,7 @@ export const EventLocation = ({ form, isVirtual, setIsVirtual }: EventLocationPr
         name="location"
         render={({ field }) => (
           <FormItem className="text-left">
-            <FormLabel className="text-left">
+            <FormLabel className="text-sm font-normal">
               {isVirtual ? "Meeting Link" : "Location"}
             </FormLabel>
             <FormControl>
@@ -48,6 +48,7 @@ export const EventLocation = ({ form, isVirtual, setIsVirtual }: EventLocationPr
                     ? "Enter meeting link" 
                     : "Enter physical location"
                 } 
+                className="text-foreground/70"
                 {...field} 
               />
             </FormControl>
