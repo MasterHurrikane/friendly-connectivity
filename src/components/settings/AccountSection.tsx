@@ -1,14 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { CreditCard, User } from "lucide-react";
+import { CreditCard } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { ProfileSection } from "@/components/profile/ProfileSection";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Database } from "@/integrations/supabase/types";
+import { useToast } from "@/hooks/use-toast";
 
 type Subscription = Database["public"]["Tables"]["subscriptions"]["Row"];
 
 export const AccountSection = () => {
+  const { toast } = useToast();
   const { data: session } = useQuery({
     queryKey: ["session"],
     queryFn: async () => {
@@ -34,14 +36,52 @@ export const AccountSection = () => {
     enabled: !!session?.user?.id,
   });
 
-  const handleManageSubscription = () => {
-    // TODO: Implement Stripe customer portal redirect
-    console.log("Manage subscription clicked");
+  const handleManageSubscription = async () => {
+    try {
+      const response = await fetch('/api/stripe/create-portal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session?.access_token}`,
+        },
+      });
+
+      if (!response.ok) throw new Error('Failed to create portal session');
+
+      const { url } = await response.json();
+      window.location.href = url;
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to load subscription management portal",
+        variant: "destructive",
+      });
+    }
   };
 
-  const handleUpgrade = () => {
-    // TODO: Implement Stripe checkout
-    console.log("Upgrade clicked");
+  const handleUpgrade = async () => {
+    try {
+      const response = await fetch('/api/stripe/create-checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${session?.access_token}`,
+        },
+      });
+
+      if (!response.ok) throw new Error('Failed to create checkout session');
+
+      const { url } = await response.json();
+      window.location.href = url;
+    } catch (error) {
+      console.error('Error:', error);
+      toast({
+        title: "Error",
+        description: "Failed to start checkout process",
+        variant: "destructive",
+      });
+    }
   };
 
   if (isLoading) {
