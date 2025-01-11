@@ -4,6 +4,7 @@ import { activityRoutes } from "@/routes/activityRoutes";
 import { notificationRoutes } from "@/routes/notificationRoutes";
 import { friendRoutes } from "@/routes/friendRoutes";
 import { eventRoutes } from "@/routes/eventRoutes";
+import { helpRoutes } from "@/routes/helpRoutes";
 import Calendar from "@/pages/Calendar";
 import Dashboard from "@/pages/Dashboard";
 import Index from "@/pages/Index";
@@ -54,6 +55,7 @@ export const router = createBrowserRouter([
   ...notificationRoutes,
   ...friendRoutes,
   ...eventRoutes,
+  ...helpRoutes,
 ]);
 
 export default router;
