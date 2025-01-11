@@ -29,54 +29,56 @@ const FriendCard = ({ friend }: FriendCardProps) => {
       className="bg-white/90 backdrop-blur-sm rounded-xl p-10 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 cursor-pointer"
       onClick={handleCardClick}
     >
-      <div className="flex items-start space-x-4">
-        <FriendAvatar avatar={friend.avatar} name={friend.name} className="w-16 h-16" />
-        <div className="flex-1">
-          <FriendHeader
-            name={friend.name}
-            nickname={friend.nickname}
-            category={friend.category}
-            metDate={friend.metDate}
-            onFavorite={handleFavorite}
-          />
-          
-          <div className="mt-4 space-y-2">
-            {friend.birthday && (
-              <div className="flex items-center text-sm text-gray-600">
-                <Calendar className="w-4 h-4 mr-2" />
-                <span>Birthday: {friend.birthday}</span>
-              </div>
-            )}
-            {friend.email && (
-              <div className="flex items-center text-sm text-gray-600">
-                <Mail className="w-4 h-4 mr-2" />
-                <span>{friend.email}</span>
-              </div>
-            )}
-            {friend.phone && (
-              <div className="flex items-center text-sm text-gray-600">
-                <Phone className="w-4 h-4 mr-2" />
-                <span>{friend.phone}</span>
-              </div>
-            )}
+      <div className="flex flex-col h-full">
+        <div className="flex items-start space-x-4">
+          <FriendAvatar avatar={friend.avatar} name={friend.name} className="w-16 h-16" />
+          <div className="flex-1">
+            <FriendHeader
+              name={friend.name}
+              nickname={friend.nickname}
+              category={friend.category}
+              metDate={friend.metDate}
+              onFavorite={handleFavorite}
+            />
+            
+            <div className="mt-4 space-y-2">
+              {friend.birthday && (
+                <div className="flex items-center text-sm text-gray-600">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  <span>Birthday: {friend.birthday}</span>
+                </div>
+              )}
+              {friend.email && (
+                <div className="flex items-center text-sm text-gray-600">
+                  <Mail className="w-4 h-4 mr-2" />
+                  <span>{friend.email}</span>
+                </div>
+              )}
+              {friend.phone && (
+                <div className="flex items-center text-sm text-gray-600">
+                  <Phone className="w-4 h-4 mr-2" />
+                  <span>{friend.phone}</span>
+                </div>
+              )}
+            </div>
           </div>
+        </div>
 
-          <div className="mt-6 flex items-center justify-between">
-            <p className="text-sm text-gray-500">
-              Last interaction: {friend.lastInteraction || "No recent interaction"}
-            </p>
-            <Button
-              variant="default"
-              size="sm"
-              className="bg-[#30adc4] hover:bg-[#2b9cb1]"
-              onClick={(e) => {
-                e.stopPropagation();
-                navigate(`/friends/${friend.id}/activity`);
-              }}
-            >
-              View Activity
-            </Button>
-          </div>
+        <div className="mt-auto pt-6 flex flex-col items-center space-y-3">
+          <p className="text-sm text-gray-500">
+            Last interaction: {friend.lastInteraction || "No recent interaction"}
+          </p>
+          <Button
+            variant="default"
+            size="sm"
+            className="bg-[#30adc4] hover:bg-[#2b9cb1]"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(`/friends/${friend.id}/activity`);
+            }}
+          >
+            View Activity
+          </Button>
         </div>
       </div>
     </motion.div>
