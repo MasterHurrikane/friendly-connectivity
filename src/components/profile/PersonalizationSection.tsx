@@ -35,10 +35,10 @@ export const PersonalizationSection = () => {
         <div>
           <Label className="block mb-1.5 text-left">Language</Label>
           <Select defaultValue="en">
-            <SelectTrigger className="w-full bg-white/50">
+            <SelectTrigger className="w-full bg-white">
               <SelectValue placeholder="Select your language" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent className="bg-white">
               <SelectItem value="en">English</SelectItem>
               <SelectItem value="es">Español (Spanish)</SelectItem>
               <SelectItem value="pt">Português (Portuguese)</SelectItem>
