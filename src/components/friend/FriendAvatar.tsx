@@ -2,13 +2,13 @@ import { motion } from "framer-motion";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { User } from "lucide-react";
 
-interface ContactAvatarProps {
+interface FriendAvatarProps {
   avatar: string;
   name: string;
   className?: string;
 }
 
-export const ContactAvatar = ({ avatar, name, className = "" }: ContactAvatarProps) => {
+export const FriendAvatar = ({ avatar, name, className = "" }: FriendAvatarProps) => {
   const isAvatarUrl = avatar.includes('dicebear');
   const initials = name
     .split(' ')

@@ -2,11 +2,11 @@ import { Activity, User } from "lucide-react";
 import { useParams } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { dummyContacts } from "@/data/dummyContacts";
+import { dummyFriends } from "@/data/dummyFriends";
 
 const FriendActivity = () => {
   const { id } = useParams();
-  const friend = dummyContacts.find(contact => contact.id === id);
+  const friend = dummyFriends.find(friend => friend.id === id);
 
   return (
     <div className="min-h-screen bg-gradient-page">

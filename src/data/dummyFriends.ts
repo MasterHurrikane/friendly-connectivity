@@ -1,4 +1,4 @@
-export interface Contact {
+export interface Friend {
   id: string;
   name: string;
   nickname?: string;
@@ -17,7 +17,7 @@ export interface Contact {
   notes?: string;
 }
 
-export const dummyContacts: Contact[] = [
+export const dummyFriends: Friend[] = [
   {
     id: "1",
     name: "John Doe",

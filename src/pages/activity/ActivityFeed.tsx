@@ -2,14 +2,14 @@ import { Activity, Calendar, MessageCircle, Image, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import { PageHeader } from "@/components/layout/PageHeader";
-import { dummyContacts } from "@/data/dummyContacts";
+import { dummyFriends } from "@/data/dummyFriends";
 
 interface ActivityItem {
   id: string;
   type: "milestone" | "event" | "memory";
   content: string;
   date: string;
-  contactId: string;
+  friendId: string;
 }
 
 const recentActivity: ActivityItem[] = [
@@ -18,21 +18,21 @@ const recentActivity: ActivityItem[] = [
     type: "milestone",
     content: "Birthday coming up",
     date: "2024-03-15",
-    contactId: "1"
+    friendId: "1"
   },
   {
     id: "2",
     type: "event",
     content: "Added to Family group",
     date: "2024-03-10",
-    contactId: "2"
+    friendId: "2"
   },
   {
     id: "3",
     type: "memory",
     content: "Shared new photos",
     date: "2024-03-08",
-    contactId: "3"
+    friendId: "3"
   }
 ];
 
@@ -50,8 +50,8 @@ const ActivityFeed = () => {
     }
   };
 
-  const getContactName = (contactId: string) => {
-    return dummyContacts.find(contact => contact.id === contactId)?.name || "Unknown";
+  const getFriendName = (friendId: string) => {
+    return dummyFriends.find(friend => friend.id === friendId)?.name || "Unknown";
   };
 
   return (
@@ -81,7 +81,7 @@ const ActivityFeed = () => {
                   </div>
                   <div className="flex-1">
                     <p className="font-medium text-foreground">
-                      {getContactName(activity.contactId)}
+                      {getFriendName(activity.friendId)}
                     </p>
                     <p className="text-sm text-gray-600">{activity.content}</p>
                     <p className="text-xs text-gray-500 mt-1">
