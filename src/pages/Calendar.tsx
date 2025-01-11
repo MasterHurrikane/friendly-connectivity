@@ -31,6 +31,25 @@ const Calendar = () => {
       location: "Conference Room A",
       notification: true,
     },
+    {
+      id: "2",
+      title: "Coffee with Sarah",
+      date: new Date(),
+      time: "14:30",
+      type: "event",
+      description: "Catch up over coffee",
+      location: "Starbucks Downtown",
+      notification: true,
+    },
+    {
+      id: "3",
+      title: "Alex's Birthday",
+      date: new Date(),
+      time: "00:00",
+      type: "birthday",
+      description: "Don't forget to wish Alex a happy birthday!",
+      notification: true,
+    },
   ]);
 
   const handleAddEvent = (newEvent: Omit<CalendarEvent, "id">) => {

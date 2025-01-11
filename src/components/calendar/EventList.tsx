@@ -1,6 +1,6 @@
 import { CalendarEvent } from "@/pages/Calendar"
 import { Card } from "@/components/ui/card"
-import { Calendar, Clock, MapPin, BellRing } from "lucide-react"
+import { Calendar, Clock, MapPin, BellRing, Coffee, Cake } from "lucide-react"
 import { format } from "date-fns"
 import { Badge } from "@/components/ui/badge"
 
@@ -9,6 +9,17 @@ interface EventListProps {
 }
 
 export const EventList = ({ events }: EventListProps) => {
+  const getEventIcon = (type: string) => {
+    switch (type) {
+      case "birthday":
+        return <Cake className="w-4 h-4 mr-1" />;
+      case "event":
+        return <Coffee className="w-4 h-4 mr-1" />;
+      default:
+        return <Calendar className="w-4 h-4 mr-1" />;
+    }
+  };
+
   if (events.length === 0) {
     return (
       <div className="text-center text-muted-foreground py-8">
@@ -23,7 +34,10 @@ export const EventList = ({ events }: EventListProps) => {
         <Card key={event.id} className="p-4">
           <div className="flex items-start justify-between">
             <div className="space-y-1">
-              <h3 className="font-medium">{event.title}</h3>
+              <div className="flex items-center">
+                {getEventIcon(event.type)}
+                <h3 className="font-medium">{event.title}</h3>
+              </div>
               <div className="flex items-center text-sm text-muted-foreground">
                 <Clock className="w-4 h-4 mr-1" />
                 {event.time}
