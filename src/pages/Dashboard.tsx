@@ -53,6 +53,13 @@ const Dashboard = () => {
     <div className="min-h-screen bg-gradient-page">
       <Navigation />
       <main className="p-6 md:ml-64">
+        <div className="mb-6">
+          <img
+            src="/lovable-uploads/f5f0433b-454b-4240-8e58-f20d8836ec72.png"
+            alt="Friendly Logo"
+            className="w-32 h-auto mb-4"
+          />
+        </div>
         <PageHeader
           title="Dashboard"
           description="Welcome to your personal relationship manager"
