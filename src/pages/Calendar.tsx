@@ -1,33 +1,60 @@
-import { Calendar as CalendarIcon, Clock } from "lucide-react"
+import { useState } from "react"
+import { Calendar as CalendarIcon, Clock, Plus, BellRing } from "lucide-react"
 import Navigation from "@/components/Navigation"
 import { PageHeader } from "@/components/layout/PageHeader"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Calendar } from "@/components/ui/calendar"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { format } from "date-fns"
+import { useToast } from "@/hooks/use-toast"
+import { CreateEventDialog } from "@/components/calendar/CreateEventDialog"
+import { EventList } from "@/components/calendar/EventList"
 
-const dummyEvents = [
-  {
-    id: 1,
-    title: "Coffee with John",
-    date: "2024-03-20",
-    time: "09:00 AM",
-    type: "Social"
-  },
-  {
-    id: 2,
-    title: "Jane's Birthday Party",
-    date: "2024-03-22",
-    time: "07:00 PM",
-    type: "Birthday"
-  },
-  {
-    id: 3,
-    title: "Team Meeting",
-    date: "2024-03-21",
-    time: "02:00 PM",
-    type: "Work"
+export interface CalendarEvent {
+  id: string
+  title: string
+  date: Date
+  time: string
+  type: "event" | "reminder" | "birthday"
+  description?: string
+  location?: string
+  notification?: boolean
+}
+
+const CalendarPage = () => {
+  const [date, setDate] = useState<Date | undefined>(new Date())
+  const [events, setEvents] = useState<CalendarEvent[]>([
+    {
+      id: "1",
+      title: "Team Meeting",
+      date: new Date(),
+      time: "10:00 AM",
+      type: "event",
+      description: "Weekly sync with the team",
+      location: "Conference Room A",
+      notification: true
+    }
+  ])
+  const { toast } = useToast()
+
+  const handleAddEvent = (newEvent: Omit<CalendarEvent, "id">) => {
+    const event = {
+      ...newEvent,
+      id: Math.random().toString(36).substr(2, 9)
+    }
+    setEvents([...events, event])
+    toast({
+      title: "Event Created",
+      description: "Your event has been added to the calendar."
+    })
   }
-]
 
-const Calendar = () => {
+  const selectedDateEvents = events.filter(
+    event => date && format(event.date, "yyyy-MM-dd") === format(date, "yyyy-MM-dd")
+  )
+
   return (
     <div className="min-h-screen bg-gradient-page">
       <Navigation />
@@ -38,33 +65,43 @@ const Calendar = () => {
           icon={CalendarIcon}
         />
         
-        <div className="grid gap-6 mt-6">
-          {dummyEvents.map((event) => (
-            <Card key={event.id}>
+        <div className="grid gap-6 md:grid-cols-[300px_1fr] mt-6">
+          <div className="space-y-4">
+            <Card>
+              <CardContent className="p-4">
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  className="rounded-md border"
+                />
+              </CardContent>
+            </Card>
+
+            <CreateEventDialog onAddEvent={handleAddEvent} />
+          </div>
+
+          <div className="space-y-4">
+            <Card>
               <CardHeader>
                 <CardTitle className="flex items-center justify-between">
-                  <span>{event.title}</span>
-                  <span className="text-sm text-muted-foreground">{event.type}</span>
+                  <span>
+                    {date ? format(date, "MMMM d, yyyy") : "Select a date"}
+                  </span>
+                  <Badge variant="secondary">
+                    {selectedDateEvents.length} Events
+                  </Badge>
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-2">
-                    <CalendarIcon className="w-4 h-4" />
-                    <span>{event.date}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4" />
-                    <span>{event.time}</span>
-                  </div>
-                </div>
+                <EventList events={selectedDateEvents} />
               </CardContent>
             </Card>
-          ))}
+          </div>
         </div>
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default Calendar;
+export default CalendarPage
