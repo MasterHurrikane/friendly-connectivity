@@ -10,7 +10,6 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
-import { Separator } from "@/components/ui/separator";
 
 interface AddFriendForm {
   name: string;
@@ -62,7 +61,7 @@ const AddFriend = () => {
           icon={UserPlus}
         />
         
-        <div className="max-w-3xl mx-auto mt-6">
+        <div className="max-w-2xl mx-auto mt-6">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <div className="bg-white p-6 rounded-lg shadow-sm border border-border">
