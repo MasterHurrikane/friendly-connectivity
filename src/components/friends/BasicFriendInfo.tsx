@@ -9,17 +9,17 @@ interface BasicFriendInfoProps {
 
 export const BasicFriendInfo = ({ form }: BasicFriendInfoProps) => {
   return (
-    <div className="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-sm border border-border/10">
-      <h3 className="text-lg font-semibold mb-4">Basic Information</h3>
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold">Basic Information</h3>
       <div className="space-y-4">
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Name</FormLabel>
+              <FormLabel className="text-left">Name</FormLabel>
               <FormControl>
-                <Input placeholder="Enter friend's name" {...field} className="bg-white/50" />
+                <Input placeholder="Enter friend's name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -32,9 +32,9 @@ export const BasicFriendInfo = ({ form }: BasicFriendInfoProps) => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Email</FormLabel>
+                <FormLabel className="text-left">Email</FormLabel>
                 <FormControl>
-                  <Input type="email" placeholder="Enter email" {...field} className="bg-white/50" />
+                  <Input type="email" placeholder="Enter email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -46,9 +46,9 @@ export const BasicFriendInfo = ({ form }: BasicFriendInfoProps) => {
             name="phone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Phone Number</FormLabel>
+                <FormLabel className="text-left">Phone Number</FormLabel>
                 <FormControl>
-                  <Input type="tel" placeholder="Enter phone number" {...field} className="bg-white/50" />
+                  <Input type="tel" placeholder="Enter phone number" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -61,13 +61,13 @@ export const BasicFriendInfo = ({ form }: BasicFriendInfoProps) => {
           name="category"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Category</FormLabel>
+              <FormLabel className="text-left">Category</FormLabel>
               <Select
                 defaultValue={field.value}
                 onValueChange={field.onChange}
               >
                 <FormControl>
-                  <SelectTrigger className="bg-white/50">
+                  <SelectTrigger>
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                 </FormControl>

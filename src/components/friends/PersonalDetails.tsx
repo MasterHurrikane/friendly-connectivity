@@ -8,17 +8,17 @@ interface PersonalDetailsProps {
 
 export const PersonalDetails = ({ form }: PersonalDetailsProps) => {
   return (
-    <div className="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-sm border border-border/10">
-      <h3 className="text-lg font-semibold mb-4">Personal Details</h3>
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold">Personal Details</h3>
       <div className="space-y-4">
         <FormField
           control={form.control}
           name="nickname"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nickname</FormLabel>
+              <FormLabel className="text-left">Nickname</FormLabel>
               <FormControl>
-                <Input placeholder="Enter nickname" {...field} className="bg-white/50" />
+                <Input placeholder="Enter nickname" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -31,9 +31,9 @@ export const PersonalDetails = ({ form }: PersonalDetailsProps) => {
             name="birthday"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Birthday</FormLabel>
+                <FormLabel className="text-left">Birthday</FormLabel>
                 <FormControl>
-                  <Input type="date" {...field} className="bg-white/50" />
+                  <Input type="date" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -45,9 +45,9 @@ export const PersonalDetails = ({ form }: PersonalDetailsProps) => {
             name="anniversary"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Anniversary</FormLabel>
+                <FormLabel className="text-left">Anniversary</FormLabel>
                 <FormControl>
-                  <Input type="date" {...field} className="bg-white/50" />
+                  <Input type="date" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -61,9 +61,9 @@ export const PersonalDetails = ({ form }: PersonalDetailsProps) => {
             name="spouse"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Spouse/Partner Name</FormLabel>
+                <FormLabel className="text-left">Spouse/Partner Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter spouse/partner name" {...field} className="bg-white/50" />
+                  <Input placeholder="Enter spouse/partner name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -75,9 +75,9 @@ export const PersonalDetails = ({ form }: PersonalDetailsProps) => {
             name="children"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Children</FormLabel>
+                <FormLabel className="text-left">Children</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter children's names" {...field} className="bg-white/50" />
+                  <Input placeholder="Enter children's names" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

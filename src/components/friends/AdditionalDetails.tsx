@@ -9,8 +9,8 @@ interface AdditionalDetailsProps {
 
 export const AdditionalDetails = ({ form }: AdditionalDetailsProps) => {
   return (
-    <div className="bg-white/95 backdrop-blur-sm p-6 rounded-lg shadow-sm border border-border/10">
-      <h3 className="text-lg font-semibold mb-4">Additional Details</h3>
+    <div className="space-y-6">
+      <h3 className="text-lg font-semibold">Additional Details</h3>
       <div className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <FormField
@@ -18,9 +18,9 @@ export const AdditionalDetails = ({ form }: AdditionalDetailsProps) => {
             name="city"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>City</FormLabel>
+                <FormLabel className="text-left">City</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter city" {...field} className="bg-white/50" />
+                  <Input placeholder="Enter city" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -32,9 +32,9 @@ export const AdditionalDetails = ({ form }: AdditionalDetailsProps) => {
             name="timezone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Timezone</FormLabel>
+                <FormLabel className="text-left">Timezone</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter timezone" {...field} className="bg-white/50" />
+                  <Input placeholder="Enter timezone" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -48,9 +48,9 @@ export const AdditionalDetails = ({ form }: AdditionalDetailsProps) => {
             name="favoriteColor"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Favorite Color</FormLabel>
+                <FormLabel className="text-left">Favorite Color</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter favorite color" {...field} className="bg-white/50" />
+                  <Input placeholder="Enter favorite color" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -62,9 +62,9 @@ export const AdditionalDetails = ({ form }: AdditionalDetailsProps) => {
             name="lastMeetup"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Last Meetup</FormLabel>
+                <FormLabel className="text-left">Last Meetup</FormLabel>
                 <FormControl>
-                  <Input type="date" {...field} className="bg-white/50" />
+                  <Input type="date" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -77,11 +77,10 @@ export const AdditionalDetails = ({ form }: AdditionalDetailsProps) => {
           name="notes"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Notes</FormLabel>
+              <FormLabel className="text-left">Notes</FormLabel>
               <FormControl>
                 <Textarea 
                   placeholder="Add any additional notes about your friend"
-                  className="bg-white/50"
                   {...field}
                 />
               </FormControl>
