@@ -19,6 +19,7 @@ import EventRSVP from "@/pages/events/EventRSVP";
 import EventTimeline from "@/pages/events/EventTimeline";
 import EventPhotos from "@/pages/events/EventPhotos";
 import PastEvents from "@/pages/events/PastEvents";
+import AddContact from "@/pages/AddContact";
 
 export const router = createBrowserRouter([
   {
@@ -100,5 +101,9 @@ export const router = createBrowserRouter([
   {
     path: "/events/past",
     element: <PastEvents />,
+  },
+  {
+    path: "/add",
+    element: <AddContact />,
   },
 ]);
