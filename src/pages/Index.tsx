@@ -8,20 +8,21 @@ const Index = () => {
 
   useEffect(() => {
     const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (session) {
-        navigate("/dashboard");
-      } else {
-        navigate("/auth/welcome");
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        
+        if (session) {
+          navigate("/dashboard");
+        } else {
+          navigate("/auth/welcome");
+        }
+      } catch (error) {
+        console.error("Auth check failed:", error);
+        navigate("/auth/welcome"); // Fallback to welcome page on error
       }
     };
 
-    const timer = setTimeout(() => {
-      checkAuth();
-    }, 2000);
-
-    return () => clearTimeout(timer);
+    checkAuth();
   }, [navigate]);
 
   return (
