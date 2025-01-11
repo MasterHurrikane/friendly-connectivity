@@ -16,45 +16,47 @@ const AddFriend = () => {
           icon={UserPlus}
         />
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
-          <Link to="/add">
-            <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer bg-white/90 backdrop-blur-sm">
-              <UserPlus className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Manual Entry</h3>
-              <p className="text-sm text-gray-600">
-                Add a friend manually by entering their details
-              </p>
-            </Card>
-          </Link>
+        <div className="max-w-4xl mx-auto mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Link to="/add">
+              <Card className="p-6 hover:shadow-lg transition-all duration-300 bg-white/95 backdrop-blur-sm border border-primary/10">
+                <UserPlus className="w-12 h-12 text-primary mb-4" />
+                <h3 className="text-lg font-semibold mb-2 text-foreground">Manual Entry</h3>
+                <p className="text-sm text-foreground/70">
+                  Add a friend manually by entering their details
+                </p>
+              </Card>
+            </Link>
 
-          <Link to="/friends/import">
-            <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer bg-white/90 backdrop-blur-sm">
-              <Import className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Import Contacts</h3>
-              <p className="text-sm text-gray-600">
-                Import friends from your contacts or social media
-              </p>
-            </Card>
-          </Link>
+            <Link to="/friends/import">
+              <Card className="p-6 hover:shadow-lg transition-all duration-300 bg-white/95 backdrop-blur-sm border border-primary/10">
+                <Import className="w-12 h-12 text-primary mb-4" />
+                <h3 className="text-lg font-semibold mb-2 text-foreground">Import Contacts</h3>
+                <p className="text-sm text-foreground/70">
+                  Import friends from your contacts or social media
+                </p>
+              </Card>
+            </Link>
 
-          <Link to="/friends/groups">
-            <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer bg-white/90 backdrop-blur-sm">
-              <Users className="w-12 h-12 text-primary mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Manage Groups</h3>
-              <p className="text-sm text-gray-600">
-                Create and manage friend groups
-              </p>
-            </Card>
-          </Link>
-        </div>
+            <Link to="/friends/groups">
+              <Card className="p-6 hover:shadow-lg transition-all duration-300 bg-white/95 backdrop-blur-sm border border-primary/10">
+                <Users className="w-12 h-12 text-primary mb-4" />
+                <h3 className="text-lg font-semibold mb-2 text-foreground">Manage Groups</h3>
+                <p className="text-sm text-foreground/70">
+                  Create and manage friend groups
+                </p>
+              </Card>
+            </Link>
+          </div>
 
-        <div className="mt-8">
-          <Link to="/friends/requests">
-            <Button variant="outline" className="w-full md:w-auto">
-              <Share2 className="w-4 h-4 mr-2" />
-              View Friend Requests
-            </Button>
-          </Link>
+          <div className="mt-8 flex justify-center">
+            <Link to="/friends/requests">
+              <Button variant="outline" className="bg-white/95 backdrop-blur-sm">
+                <Share2 className="w-4 h-4 mr-2" />
+                View Friend Requests
+              </Button>
+            </Link>
+          </div>
         </div>
       </main>
     </div>
