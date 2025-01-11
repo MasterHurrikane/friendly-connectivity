@@ -3,18 +3,23 @@ export interface Friend {
   name: string;
   nickname?: string;
   category: string;
-  lastInteraction: string;
-  email: string;
-  phone: string;
-  birthday: string;
+  lastInteraction?: string;
+  email?: string;
+  phone?: string;
+  birthday?: string;
   anniversary?: string;
   spouse?: string;
   children?: string;
-  metDate: string;
-  city: string;
-  timezone: string;
+  metDate?: string;
+  city?: string;
+  timezone?: string;
   avatar: string;
   notes?: string;
+  first_name?: string;
+  last_name?: string;
+  bio?: string;
+  interests?: string[];
+  hobbies?: string[];
 }
 
 export const dummyFriends: Friend[] = [

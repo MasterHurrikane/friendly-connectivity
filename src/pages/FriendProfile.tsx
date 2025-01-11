@@ -10,6 +10,7 @@ import { FriendDetails } from "@/components/friend/FriendDetails";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/components/ui/use-toast";
+import { Friend } from "@/data/dummyFriends";
 
 const FriendProfile = () => {
   const { id } = useParams();
@@ -93,7 +94,6 @@ const FriendProfile = () => {
 
       if (error) throw error;
 
-      // Also remove from friends list
       await removeFriendMutation.mutateAsync();
     },
     onSuccess: () => {
@@ -141,6 +141,26 @@ const FriendProfile = () => {
     ? calculateFriendshipDuration(friend.friendship_date)
     : "Recently added";
 
+  // Map the Supabase data to our Friend interface
+  const friendData: Friend = {
+    id: friend.friend.id,
+    name: friendName,
+    avatar: "", // TODO: Add avatar support
+    category: friend.relationship_type || "Friend",
+    lastInteraction: friend.last_interaction || undefined,
+    metDate: friend.friendship_date,
+    email: "",  // These fields are not in the current Supabase schema
+    phone: "",  // but are required by the Friend interface
+    birthday: "",
+    city: "",
+    timezone: "",
+    first_name: friend.friend.first_name,
+    last_name: friend.friend.last_name,
+    bio: friend.friend.bio,
+    interests: friend.friend.interests,
+    hobbies: friend.friend.hobbies,
+  };
+
   return (
     <div className="min-h-screen bg-gradient-page">
       <Navigation />
@@ -157,13 +177,7 @@ const FriendProfile = () => {
               <CardContent className="p-6">
                 <div className="flex justify-between items-start mb-6">
                   <FriendBasicInfo 
-                    friend={{
-                      ...friend.friend,
-                      name: friendName,
-                      avatar: "", // TODO: Add avatar support
-                      category: friend.relationship_type || "Friend",
-                      metDate: friend.friendship_date,
-                    }}
+                    friend={friendData}
                     friendshipDuration={friendshipDuration}
                   />
                   <div className="flex gap-2">
@@ -200,17 +214,7 @@ const FriendProfile = () => {
 
                 <Separator className="my-6" />
 
-                <FriendDetails friend={{
-                  ...friend.friend,
-                  name: friendName,
-                  avatar: "", // TODO: Add avatar support
-                  category: friend.relationship_type || "Friend",
-                  lastInteraction: friend.last_interaction,
-                  email: "", // TODO: Add email support
-                  phone: "", // TODO: Add phone support
-                  birthday: "", // TODO: Add birthday support
-                  metDate: friend.friendship_date,
-                }} />
+                <FriendDetails friend={friendData} />
 
                 <Separator className="my-6" />
 
