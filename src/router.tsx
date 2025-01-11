@@ -1,38 +1,63 @@
 import { createBrowserRouter } from "react-router-dom";
-import Contacts from "@/pages/Contacts";
-import Profile from "@/pages/Profile";
-import ContactProfile from "@/pages/ContactProfile";
+import Index from "@/pages/Index";
+import Welcome from "@/pages/auth/Welcome";
+import Login from "@/pages/auth/Login";
+import Signup from "@/pages/auth/Signup";
+import ForgotPassword from "@/pages/auth/ForgotPassword";
 import Dashboard from "@/pages/Dashboard";
+import Profile from "@/pages/Profile";
+import Contacts from "@/pages/Contacts";
+import ContactProfile from "@/pages/ContactProfile";
 import ActivityFeed from "@/pages/activity/ActivityFeed";
 import EngagementStats from "@/pages/activity/EngagementStats";
-import SharedMemories from "@/pages/activity/SharedMemories";
 import FriendActivity from "@/pages/activity/FriendActivity";
+import SharedMemories from "@/pages/activity/SharedMemories";
 import NotificationsInbox from "@/pages/notifications/NotificationsInbox";
-import PriorityNotifications from "@/pages/notifications/PriorityNotifications";
-import NotificationSettings from "@/pages/notifications/NotificationSettings";
 import EventReminders from "@/pages/notifications/EventReminders";
 import GroupNotifications from "@/pages/notifications/GroupNotifications";
+import PriorityNotifications from "@/pages/notifications/PriorityNotifications";
+import NotificationSettings from "@/pages/notifications/NotificationSettings";
 import CreateEvent from "@/pages/events/CreateEvent";
 import InviteFriends from "@/pages/events/InviteFriends";
 import EventDetails from "@/pages/events/EventDetails";
-import EventRSVP from "@/pages/events/EventRSVP";
 import EventTimeline from "@/pages/events/EventTimeline";
 import EventPhotos from "@/pages/events/EventPhotos";
 import PastEvents from "@/pages/events/PastEvents";
 import AddContact from "@/pages/AddContact";
+import CalendarPage from "@/pages/Calendar";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Dashboard />,
+    element: <Index />,
   },
   {
-    path: "/contacts",
-    element: <Contacts />,
+    path: "/welcome",
+    element: <Welcome />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPassword />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
   },
   {
     path: "/profile",
     element: <Profile />,
+  },
+  {
+    path: "/contacts",
+    element: <Contacts />,
   },
   {
     path: "/contacts/:id",
@@ -43,28 +68,20 @@ export const router = createBrowserRouter([
     element: <ActivityFeed />,
   },
   {
-    path: "/activity/stats",
+    path: "/activity/engagement",
     element: <EngagementStats />,
+  },
+  {
+    path: "/activity/friends",
+    element: <FriendActivity />,
   },
   {
     path: "/activity/memories",
     element: <SharedMemories />,
   },
   {
-    path: "/activity/:id",
-    element: <FriendActivity />,
-  },
-  {
     path: "/notifications",
     element: <NotificationsInbox />,
-  },
-  {
-    path: "/notifications/priority",
-    element: <PriorityNotifications />,
-  },
-  {
-    path: "/notifications/settings",
-    element: <NotificationSettings />,
   },
   {
     path: "/notifications/events",
@@ -75,20 +92,24 @@ export const router = createBrowserRouter([
     element: <GroupNotifications />,
   },
   {
-    path: "/events/create",
+    path: "/notifications/priority",
+    element: <PriorityNotifications />,
+  },
+  {
+    path: "/notifications/settings",
+    element: <NotificationSettings />,
+  },
+  {
+    path: "/events/new",
     element: <CreateEvent />,
   },
   {
-    path: "/events/:id/invite",
+    path: "/events/new/invite",
     element: <InviteFriends />,
   },
   {
     path: "/events/:id",
     element: <EventDetails />,
-  },
-  {
-    path: "/events/:id/rsvp",
-    element: <EventRSVP />,
   },
   {
     path: "/events/:id/timeline",
@@ -105,5 +126,9 @@ export const router = createBrowserRouter([
   {
     path: "/add",
     element: <AddContact />,
+  },
+  {
+    path: "/calendar",
+    element: <CalendarPage />,
   },
 ]);
