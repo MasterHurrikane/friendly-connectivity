@@ -11,9 +11,9 @@ export const PersonalizationSection = () => {
       icon={Paintbrush}
     >
       <div className="space-y-6">
-        <div className="space-y-2">
-          <Label>Theme Preference</Label>
-          <RadioGroup defaultValue="light" className="grid grid-cols-2 gap-4">
+        <div>
+          <Label className="block mb-1.5">Theme Preference</Label>
+          <RadioGroup defaultValue="light" className="grid grid-cols-2 gap-4 bg-white/50 p-2 rounded-md">
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="light" id="light" />
               <Label htmlFor="light">Light Mode</Label>
@@ -25,9 +25,9 @@ export const PersonalizationSection = () => {
           </RadioGroup>
         </div>
 
-        <div className="space-y-2">
-          <Label>Language</Label>
-          <RadioGroup defaultValue="en" className="grid grid-cols-2 gap-4">
+        <div>
+          <Label className="block mb-1.5">Language</Label>
+          <RadioGroup defaultValue="en" className="grid grid-cols-2 gap-4 bg-white/50 p-2 rounded-md">
             <div className="flex items-center space-x-2">
               <RadioGroupItem value="en" id="en" />
               <Label htmlFor="en">English</Label>

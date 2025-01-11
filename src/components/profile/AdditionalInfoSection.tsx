@@ -11,17 +11,17 @@ export const AdditionalInfoSection = () => {
       icon={FileText}
     >
       <div className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="bio">Bio</Label>
+        <div>
+          <Label htmlFor="bio" className="block mb-1.5">Bio</Label>
           <textarea
             id="bio"
-            className="w-full min-h-[100px] p-2 border rounded-md"
+            className="w-full min-h-[100px] p-2 border rounded-md bg-white/50"
             placeholder="Tell us about yourself..."
           />
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="location">Location</Label>
-          <Input id="location" placeholder="City, Country" />
+        <div>
+          <Label htmlFor="location" className="block mb-1.5">Location</Label>
+          <Input id="location" placeholder="City, Country" className="bg-white/50" />
         </div>
       </div>
     </ProfileSection>
