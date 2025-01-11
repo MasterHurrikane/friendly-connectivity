@@ -11,7 +11,7 @@ const Navigation = () => {
     { path: "/", icon: Home, label: "Dashboard" },
     { path: "/profile", icon: UserCircle, label: "My Profile" },
     { path: "/contacts", icon: Users, label: "Friends" },
-    { path: "/add", icon: UserPlus, label: "Add Contact" },
+    { path: "/add", icon: UserPlus, label: "Add Friend" },
     { path: "/calendar", icon: Calendar, label: "Calendar" },
   ];
 

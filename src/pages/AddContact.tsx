@@ -23,8 +23,8 @@ const AddContact = () => {
       <Navigation />
       <main className="p-6 md:ml-64">
         <PageHeader
-          title="Add Contact"
-          description="Add a new contact to your network"
+          title="Add Friend"
+          description="Add a new friend to your network"
           icon={UserPlus}
         />
         
