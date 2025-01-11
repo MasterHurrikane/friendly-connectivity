@@ -24,7 +24,7 @@ export interface Friend {
 
 export const dummyFriends: Friend[] = [
   {
-    id: "1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+    id: "123e4567-e89b-12d3-a456-426614174000",
     name: "John Doe",
     nickname: "Johnny",
     category: "Friend",
@@ -42,7 +42,7 @@ export const dummyFriends: Friend[] = [
     notes: "Met at the local tech meetup. Loves hiking and photography."
   },
   {
-    id: "2b3c4d5e-6f7g-8h9i-0j1k-2l3m4n5o6p7q",
+    id: "223e4567-e89b-12d3-a456-426614174001",
     name: "Jane Smith",
     nickname: "Janey",
     category: "Family",
@@ -60,7 +60,7 @@ export const dummyFriends: Friend[] = [
     notes: "My cousin from New York. Amazing baker and always brings cookies."
   },
   {
-    id: "3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r",
+    id: "323e4567-e89b-12d3-a456-426614174002",
     name: "Bob Wilson",
     nickname: "Bobby",
     category: "Work",
@@ -78,7 +78,7 @@ export const dummyFriends: Friend[] = [
 
 export const suggestedFriends: Friend[] = [
   {
-    id: "4d5e6f7g-8h9i-0j1k-2l3m-4n5o6p7q8r9s",
+    id: "423e4567-e89b-12d3-a456-426614174003",
     name: "Sarah Chen",
     category: "Suggested",
     email: "sarah@example.com",
@@ -92,7 +92,7 @@ export const suggestedFriends: Friend[] = [
     hobbies: ["Rock climbing", "Cooking"]
   },
   {
-    id: "5e6f7g8h-9i0j-1k2l-3m4n-5o6p7q8r9s0t",
+    id: "523e4567-e89b-12d3-a456-426614174004",
     name: "Michael Rodriguez",
     category: "Suggested",
     email: "michael@example.com",
@@ -106,7 +106,7 @@ export const suggestedFriends: Friend[] = [
     hobbies: ["DJing", "Brewing coffee"]
   },
   {
-    id: "6f7g8h9i-0j1k-2l3m-4n5o-6p7q8r9s0t1u",
+    id: "623e4567-e89b-12d3-a456-426614174005",
     name: "Emily Parker",
     category: "Suggested",
     email: "emily@example.com",
