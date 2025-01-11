@@ -20,6 +20,13 @@ export const EventList = ({ events }: EventListProps) => {
     }
   };
 
+  // Sort events by time
+  const sortedEvents = [...events].sort((a, b) => {
+    const timeA = a.time.split(':').map(Number);
+    const timeB = b.time.split(':').map(Number);
+    return (timeA[0] * 60 + timeA[1]) - (timeB[0] * 60 + timeB[1]);
+  });
+
   if (events.length === 0) {
     return (
       <div className="text-center text-muted-foreground py-8">
@@ -28,10 +35,17 @@ export const EventList = ({ events }: EventListProps) => {
     )
   }
 
+  const formatTime = (time: string) => {
+    const [hours, minutes] = time.split(':').map(Number);
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 || 12;
+    return `${formattedHours}:${minutes.toString().padStart(2, '0')} ${period}`;
+  };
+
   return (
     <div className="space-y-4">
-      {events.map((event) => (
-        <Card key={event.id} className="p-4">
+      {sortedEvents.map((event) => (
+        <Card key={event.id} className="p-4 hover:shadow-md transition-shadow">
           <div className="flex items-start justify-between">
             <div className="space-y-1">
               <div className="flex items-center">
@@ -40,7 +54,7 @@ export const EventList = ({ events }: EventListProps) => {
               </div>
               <div className="flex items-center text-sm text-muted-foreground">
                 <Clock className="w-4 h-4 mr-1" />
-                {event.time}
+                {formatTime(event.time)}
               </div>
               {event.location && (
                 <div className="flex items-center text-sm text-muted-foreground">
@@ -55,7 +69,16 @@ export const EventList = ({ events }: EventListProps) => {
               )}
             </div>
             <div className="flex items-center space-x-2">
-              <Badge variant={event.type === "event" ? "default" : event.type === "reminder" ? "secondary" : "destructive"}>
+              <Badge 
+                variant={
+                  event.type === "birthday" 
+                    ? "destructive" 
+                    : event.type === "reminder" 
+                      ? "secondary" 
+                      : "default"
+                }
+                className="capitalize"
+              >
                 {event.type}
               </Badge>
               {event.notification && (

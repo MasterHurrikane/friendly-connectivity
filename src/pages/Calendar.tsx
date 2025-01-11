@@ -6,6 +6,7 @@ import { CreateEventDialog } from "@/components/calendar/CreateEventDialog";
 import { EventList } from "@/components/calendar/EventList";
 import { Card, CardContent } from "@/components/ui/card";
 import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { isSameDay } from "date-fns";
 
 export interface CalendarEvent {
   id: string;
@@ -63,10 +64,13 @@ const Calendar = () => {
   const selectedDateEvents = events.filter(
     (event) =>
       date &&
-      event.date.getFullYear() === date.getFullYear() &&
-      event.date.getMonth() === date.getMonth() &&
-      event.date.getDate() === date.getDate()
+      isSameDay(event.date, date)
   );
+
+  // Function to check if a day has events
+  const isDayWithEvents = (day: Date) => {
+    return events.some((event) => isSameDay(event.date, day));
+  };
 
   return (
     <div className="min-h-screen bg-gradient-page">
@@ -87,6 +91,16 @@ const Calendar = () => {
                   selected={date}
                   onSelect={setDate}
                   className="rounded-md border"
+                  modifiers={{
+                    hasEvents: (date) => isDayWithEvents(date),
+                  }}
+                  modifiersStyles={{
+                    hasEvents: {
+                      fontWeight: 'bold',
+                      textDecoration: 'underline',
+                      color: 'var(--primary)',
+                    }
+                  }}
                 />
               </CardContent>
             </Card>
